@@ -10,6 +10,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
 
     // hi from collaborator
+    // hi from new branch
 
     @Override
     public void start(Stage stage) throws IOException {
