@@ -5,5 +5,8 @@
     #0D179A     /* End with the darkest shade */
     );
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0, 1, 1);
+}
 
+.but{
+    -fx-padding:0px;
 }
