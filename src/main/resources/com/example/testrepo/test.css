@@ -1,0 +1,9 @@
+#body{
+    -fx-background-color: linear-gradient(to bottom,
+    #DC1A23, /* Transition to base color */
+    #751A5E, /* Darker shade for depth */
+    #0D179A     /* End with the darkest shade */
+    );
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0, 1, 1);
+
+}
