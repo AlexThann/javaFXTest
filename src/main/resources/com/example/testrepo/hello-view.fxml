@@ -15,7 +15,7 @@
    <children>
       <BorderPane prefHeight="559.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
-            <AnchorPane prefHeight="528.0" prefWidth="515.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="528.0" prefWidth="478.0" BorderPane.alignment="CENTER">
                <children>
                   <VBox alignment="CENTER" layoutX="88.0" layoutY="93.0" prefHeight="342.0" prefWidth="242.0" spacing="20.0" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="88.0" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="93.0">
                      <children>
@@ -77,9 +77,9 @@
             </AnchorPane>
          </right>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="528.0" prefWidth="322.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox id="body" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="528.0" prefWidth="353.0" spacing="20.0" stylesheets="@test.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox id="body" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="528.0" prefWidth="278.0" spacing="20.0" stylesheets="@test.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-21.0" AnchorPane.topAnchor="0.0">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
