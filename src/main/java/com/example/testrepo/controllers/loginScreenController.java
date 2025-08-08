@@ -30,14 +30,14 @@ public class loginScreenController {
             showedPasswordField.setManaged(false);
             hiddenPasswordField.setVisible(true);
             hiddenPasswordField.setManaged(true);
-            togglePasswordVisibilityButton.setText("show password");
+            togglePasswordVisibilityButton.setText("Show Password");
         } else {
             // Show plain text, hide password field
             showedPasswordField.setVisible(true);
             showedPasswordField.setManaged(true);
             hiddenPasswordField.setVisible(false);
             hiddenPasswordField.setManaged(false);
-            togglePasswordVisibilityButton.setText("hide password");
+            togglePasswordVisibilityButton.setText("Hide Password");
         }
     }
 }
