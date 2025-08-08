@@ -5,4 +5,6 @@ module com.example.testrepo {
 
     opens com.example.testrepo to javafx.fxml;
     exports com.example.testrepo;
+    exports com.example.testrepo.controllers;
+    opens com.example.testrepo.controllers to javafx.fxml;
 }

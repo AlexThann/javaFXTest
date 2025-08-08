@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="528.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.HelloController">
+<AnchorPane prefHeight="528.0" prefWidth="735.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
    <children>
       <BorderPane prefHeight="559.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
@@ -40,11 +40,11 @@
                               </Label>
                               <StackPane prefHeight="34.0" prefWidth="325.0">
                                  <children>
-                                    <PasswordField fx:id="hiddenpassword" prefHeight="33.0" prefWidth="324.0" promptText="Password" />
-                                    <TextField fx:id="showedpassword" prefHeight="33.0" prefWidth="324.0" promptText="Password" visible="false" />
+                                    <PasswordField fx:id="hiddenPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" />
+                                    <TextField fx:id="showedPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" visible="false" />
                                  </children>
                               </StackPane>
-                              <Button fx:id="eyebutton" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="79.0" style="-fx-background-color: transparent; -fx-alignment: CENTER_LEFT; -fx-border-width: 0; -fx-padding: 0 0 0 0;" text="show password" textFill="#6a6971">
+                              <Button fx:id="togglePasswordVisibilityButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#togglePasswordVisibility" prefHeight="18.0" prefWidth="79.0" style="-fx-background-color: transparent; -fx-alignment: CENTER_LEFT; -fx-border-width: 0; -fx-padding: 0 0 0 0;" text="show password" textFill="#6a6971">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -91,13 +91,13 @@
          <center>
             <AnchorPane prefHeight="528.0" prefWidth="322.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox id="body" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="528.0" prefWidth="278.0" spacing="20.0" stylesheets="@test.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-21.0" AnchorPane.topAnchor="0.0">
+                  <VBox id="body" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="528.0" prefWidth="278.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-21.0" AnchorPane.topAnchor="0.0">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <ImageView fitHeight="154.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@../../../Screenshot_10.png" />
+                           <Image url="@../images/loginLogo.png" />
                         </image>
                      </ImageView>
                      <Label alignment="CENTER" prefHeight="27.0" prefWidth="159.0" style="-fx-text-fill: #f02654;" text="Welcome" textFill="#f02654">

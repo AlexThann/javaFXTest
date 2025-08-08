@@ -7,13 +7,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class launchApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        // path starts from resources folder.
+        FXMLLoader fxmlLoader = new FXMLLoader(launchApp.class.getResource("/com/example/testrepo/fxml/login-screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
-        stage.setTitle("Hello!");
+        stage.setTitle("Cinema Management System");
         stage.setScene(scene);
         //setting the minimum size of the window
         stage.setMinWidth(800);
