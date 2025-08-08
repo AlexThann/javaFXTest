@@ -1,13 +1,55 @@
-#body{
+*{
+    -fx-primary-red:#DC1A23;
+    -fx-primary-purple:#751A5E;
+    -fx-primary-blue:#0D179A;
+}
+
+#welcome-label{
+    -fx-text-fill: #f02654;
+    -fx-font-size:18px;
+    -fx-font-style:italic;
+    -fx-font-weight:bold;
+}
+
+#welcome-pane-background{
     -fx-background-color: linear-gradient(to bottom,
-    #DC1A23, /* Transition to base color */
-    #751A5E, /* Darker shade for depth */
-    #0D179A     /* End with the darkest shade */
+    -fx-primary-red, /* Transition to base color */
+    -fx-primary-purple, /* Darker shade for depth */
+    -fx-primary-blue     /* End with the darkest shade */
     );
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 15, 0, 1, 1);
 }
 
-.but{
-    -fx-padding:0px;
+.input-label{
+    -fx-text-fill:#ad0050;
+    -fx-font-size:14px;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
 }
 
+.show-password-button{
+    -fx-background-color: transparent;
+    -fx-alignment:CENTER_LEFT;
+    -fx-border-width:0;
+    -fx-padding:0;
+    -fx-font-size:11px;
+    -fx-text-fill:#6a6971;
+}
+
+.login-register-buttons{
+    -fx-text-fill:white;
+    -fx-font-size:14px;
+    -fx-font-weight:bold;
+}
+
+#login-button{
+    -fx-background-color: #3B4FC0;
+}
+
+#register-button{
+    -fx-background-color: #7A59B8;
+}
+
+.error-label{
+    -fx-text-fill:red;
+}

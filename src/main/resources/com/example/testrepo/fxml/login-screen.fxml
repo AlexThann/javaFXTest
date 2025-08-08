@@ -23,46 +23,30 @@
                      <children>
                         <VBox>
                            <children>
-                              <Label prefHeight="25.0" prefWidth="306.0" text="Enter Username:" textFill="#ad0050c9">
-                                 <font>
-                                    <Font name="System Bold Italic" size="14.0" />
-                                 </font>
-                              </Label>
+                              <Label prefHeight="25.0" prefWidth="306.0" styleClass="input-label" text="Enter Username:" />
                               <TextField prefHeight="33.0" prefWidth="324.0" promptText="Username" />
                            </children>
                         </VBox>
                         <VBox>
                            <children>
-                              <Label prefHeight="26.0" prefWidth="306.0" text="Enter Password:" textFill="#ad0050c9">
-                                 <font>
-                                    <Font name="System Bold Italic" size="14.0" />
-                                 </font>
-                              </Label>
+                              <Label prefHeight="26.0" prefWidth="306.0" styleClass="input-label" text="Enter Password:" />
                               <StackPane prefHeight="34.0" prefWidth="325.0">
                                  <children>
                                     <PasswordField fx:id="hiddenPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" />
                                     <TextField fx:id="showedPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" visible="false" />
                                  </children>
                               </StackPane>
-                              <Button fx:id="togglePasswordVisibilityButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#togglePasswordVisibility" prefHeight="18.0" prefWidth="79.0" style="-fx-background-color: transparent; -fx-alignment: CENTER_LEFT; -fx-border-width: 0; -fx-padding: 0 0 0 0;" text="show password" textFill="#6a6971">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Button>
+                              <Button fx:id="togglePasswordVisibilityButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#togglePasswordVisibility" prefHeight="18.0" prefWidth="79.0" styleClass="show-password-button" text="Show Password" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="140.0" prefWidth="268.0" spacing="20.0">
                            <children>
                               <VBox>
                                  <children>
-                                    <Label text="Incorrect Username or Password !" textFill="RED" />
+                                    <Label styleClass="error-label" text="Incorrect Username or Password !" />
                                     <AnchorPane>
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #3B4FC0;" text="LOGIN" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <font>
-                                                <Font name="System Bold" size="14.0" />
-                                             </font>
-                                          </Button>
+                                          <Button id="login-button" mnemonicParsing="false" prefHeight="35.0" prefWidth="268.0" styleClass="login-register-buttons" text="LOGIN" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -72,7 +56,7 @@
                                     <Label text="Don't have an account?" textFill="#1278a4" />
                                     <AnchorPane>
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="268.0" style="-fx-background-color: #7A59B8;" text="REGISTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button id="register-button" mnemonicParsing="false" prefHeight="35.0" prefWidth="268.0" styleClass="login-register-buttons" text="REGISTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -91,7 +75,7 @@
          <center>
             <AnchorPane prefHeight="528.0" prefWidth="322.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox id="body" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="528.0" prefWidth="278.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-21.0" AnchorPane.topAnchor="0.0">
+                  <VBox id="welcome-pane-background" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="528.0" prefWidth="266.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
@@ -100,11 +84,7 @@
                            <Image url="@../images/loginLogo.png" />
                         </image>
                      </ImageView>
-                     <Label alignment="CENTER" prefHeight="27.0" prefWidth="159.0" style="-fx-text-fill: #f02654;" text="Welcome" textFill="#f02654">
-                        <font>
-                           <Font name="System Bold Italic" size="18.0" />
-                        </font>
-                     </Label>
+                     <Label id="welcome-label" alignment="CENTER" prefHeight="27.0" prefWidth="159.0" text="Welcome" />
                   </VBox>
                </children>
             </AnchorPane>
