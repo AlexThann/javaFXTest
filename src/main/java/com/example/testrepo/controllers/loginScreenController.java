@@ -1,11 +1,13 @@
 package com.example.testrepo.controllers;
 
 import javafx.fxml.FXML;
-
+import com.example.testrepo.util.DbConnection;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.sql.Connection;
 
 public class loginScreenController {
 
@@ -39,5 +41,11 @@ public class loginScreenController {
             hiddenPasswordField.setManaged(false);
             togglePasswordVisibilityButton.setText("Hide Password");
         }
+    }
+
+    public void loginUser() {
+        DbConnection dbConnection = new DbConnection();
+        Connection con = dbConnection.getConnection();
+
     }
 }

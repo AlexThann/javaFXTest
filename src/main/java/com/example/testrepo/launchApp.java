@@ -13,12 +13,12 @@ public class launchApp extends Application {
     public void start(Stage stage) throws IOException {
         // path starts from resources folder.
         FXMLLoader fxmlLoader = new FXMLLoader(launchApp.class.getResource("/com/example/testrepo/fxml/login-screen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Cinema Management System");
         stage.setScene(scene);
         //setting the minimum size of the window
-        stage.setMinWidth(800);
-        stage.setMinHeight(500);
+        stage.setMinWidth(850);
+        stage.setMinHeight(550);
         stage.show();
     }
 
