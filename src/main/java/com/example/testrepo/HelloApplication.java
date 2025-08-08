@@ -9,15 +9,15 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    // hi from collaborator
-    // hi from new branch
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         stage.setTitle("Hello!");
         stage.setScene(scene);
+        //setting the minimum size of the window
+        stage.setMinWidth(800);
+        stage.setMinHeight(500);
         stage.show();
     }
 
