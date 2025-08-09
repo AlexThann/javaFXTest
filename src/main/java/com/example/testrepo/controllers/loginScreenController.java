@@ -87,6 +87,8 @@ public class loginScreenController {
         togglePasswordFields(hiddenConfirmPasswordField, showedConfirmPasswordField, toggleConfirmPasswordVisibilityButton);
     }
 
+    private DbConnection dbConnection = new DbConnection();
+
     public void togglePasswordFields(PasswordField hidden,TextField showed,Button toggleButton) {
         if (showed.isVisible()) {
             showed.setVisible(false);
@@ -127,7 +129,7 @@ public class loginScreenController {
 
     public void loginUser() throws IOException {
         // DB Connection
-        DbConnection dbConnection = new DbConnection();
+
         Connection con = dbConnection.getConnection();
         //Username and Password from UI
         String username = loginUsernameTextField.getText();
@@ -148,6 +150,7 @@ public class loginScreenController {
                 loginErrorLabel.setText("Incorrect Username or Password!");
                 loginErrorLabel.setVisible(true);
                 loginErrorLabel.setManaged(true);
+                return;
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -155,19 +158,22 @@ public class loginScreenController {
         }
 
         // Load the correct FXML based on role
-        FXMLLoader loader = null ;
+        FXMLLoader loader;
 
         if ("ADMIN".equalsIgnoreCase(roleName)) { // ADMIN
             loader = new FXMLLoader(getClass().getResource("/com/example/testrepo/fxml/admin.fxml"));
         } else if ("USER".equalsIgnoreCase(roleName)) { // USER
             loader = new FXMLLoader(getClass().getResource("/com/example/testrepo/fxml/user.fxml"));
         } else {
-            System.out.println("Not valid role: " + roleName);
+            return;
         }
 
         Parent root = loader.load();
         Stage stage = (Stage) loginUsernameTextField.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+
+        dbConnection.closeConnection();
+
     }
 }
