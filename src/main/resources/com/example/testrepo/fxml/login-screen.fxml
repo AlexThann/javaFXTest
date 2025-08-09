@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
    <children>
       <BorderPane prefHeight="559.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
             <AnchorPane prefHeight="528.0" prefWidth="478.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER" layoutX="88.0" layoutY="93.0" prefHeight="342.0" prefWidth="242.0" spacing="20.0" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="88.0" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="93.0">
+                  <VBox alignment="CENTER" disable="true" layoutX="88.0" layoutY="93.0" prefHeight="294.0" prefWidth="306.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="100.0">
                      <children>
                         <VBox>
                            <children>
@@ -39,7 +39,7 @@
                               <Button fx:id="togglePasswordVisibilityButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#togglePasswordVisibility" prefHeight="18.0" prefWidth="79.0" styleClass="show-password-button" text="Show Password" />
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="140.0" prefWidth="268.0" spacing="20.0">
+                        <VBox alignment="CENTER" prefHeight="133.0" prefWidth="306.0" spacing="20.0">
                            <children>
                               <VBox>
                                  <children>
@@ -51,7 +51,7 @@
                                     </AnchorPane>
                                  </children>
                               </VBox>
-                              <VBox prefHeight="70.0" prefWidth="268.0">
+                              <VBox prefHeight="56.0" prefWidth="306.0">
                                  <children>
                                     <Label text="Don't have an account?" textFill="#1278a4" />
                                     <AnchorPane>
@@ -61,6 +61,74 @@
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Button>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="120.0" layoutY="79.0" prefHeight="342.0" prefWidth="242.0" spacing="10.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="60.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="306.0" styleClass="input-label" text="Enter Full Name:" />
+                              <TextField prefHeight="33.0" prefWidth="324.0" promptText="Full Name" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="306.0" styleClass="input-label" text="Enter Username:" />
+                              <TextField prefHeight="33.0" prefWidth="324.0" promptText="Username" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="306.0" styleClass="input-label" text="Enter Password:" />
+                              <StackPane prefHeight="34.0" prefWidth="325.0">
+                                 <children>
+                                    <PasswordField fx:id="hiddenPasswordField1" prefHeight="33.0" prefWidth="324.0" promptText="Password" />
+                                    <TextField fx:id="showedPasswordField1" prefHeight="33.0" prefWidth="324.0" promptText="Password" visible="false" />
+                                 </children>
+                              </StackPane>
+                              <Button fx:id="togglePasswordVisibilityButton1" graphicTextGap="0.0" mnemonicParsing="false" onAction="#togglePasswordVisibility" prefHeight="18.0" prefWidth="79.0" styleClass="show-password-button" text="Show Password" />
+                           </children>
+                        </VBox>
+                        <VBox minHeight="0.0">
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="306.0" styleClass="input-label" text="Confirm Password:" />
+                              <StackPane prefHeight="34.0" prefWidth="325.0">
+                                 <children>
+                                    <PasswordField fx:id="hiddenPasswordField11" prefHeight="33.0" prefWidth="324.0" promptText="Password" />
+                                    <TextField fx:id="showedPasswordField11" prefHeight="33.0" prefWidth="324.0" promptText="Password" visible="false" />
+                                 </children>
+                              </StackPane>
+                              <Button fx:id="togglePasswordVisibilityButton11" graphicTextGap="0.0" mnemonicParsing="false" onAction="#togglePasswordVisibility" prefHeight="18.0" prefWidth="79.0" styleClass="show-password-button" text="Show Password" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="140.0" prefWidth="268.0" spacing="10.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label styleClass="error-label" text="Passwords do not match/ User alreasy exists" />
+                                    <AnchorPane>
+                                       <children>
+                                          <Button id="register-button" mnemonicParsing="false" prefHeight="35.0" prefWidth="268.0" styleClass="login-register-buttons" text="CREATE ACCOUNT" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="63.0" prefWidth="242.0">
+                                 <children>
+                                    <Label text="Already have an account?" textFill="#1278a4" />
+                                    <AnchorPane>
+                                       <children>
+                                          <Button id="login-button" mnemonicParsing="false" onAction="#loginUser" prefHeight="35.0" prefWidth="268.0" styleClass="login-register-buttons" text="LOGIN" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
