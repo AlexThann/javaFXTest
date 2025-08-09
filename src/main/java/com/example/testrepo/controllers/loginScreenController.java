@@ -3,12 +3,26 @@ package com.example.testrepo.controllers;
 import javafx.fxml.FXML;
 import com.example.testrepo.util.DbConnection;
 
+// extra
+import javafx.fxml.FXMLLoader;
+
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
+
+// extras
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 
 public class loginScreenController {
     @FXML
@@ -42,6 +56,8 @@ public class loginScreenController {
     @FXML
     private VBox registerVBoxUI;
 
+    @FXML
+    private Label loginErrorLabel;
 
     @FXML
     public void initialize() {
@@ -109,9 +125,49 @@ public class loginScreenController {
         registerVBoxUI.setManaged(true);
     }
 
-    public void loginUser() {
+    public void loginUser() throws IOException {
+        // DB Connection
         DbConnection dbConnection = new DbConnection();
         Connection con = dbConnection.getConnection();
+        //Username and Password from UI
+        String username = loginUsernameTextField.getText();
+        String password = hiddenLoginPasswordField.getText();
 
+        String roleName = null;
+        // Checking for match and getting the role
+        try {
+            String sql = "SELECT r.role_name FROM users u JOIN roles r ON u.role_id = r.role_id WHERE u.username = ? AND u.password = ?";
+            PreparedStatement ps = con.prepareStatement(sql); // No sql injection
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) { // user exists
+                roleName = rs.getString("role_name");
+            } else { // no match
+                loginErrorLabel.setText("Incorrect Username or Password!");
+                loginErrorLabel.setVisible(true);
+                loginErrorLabel.setManaged(true);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        // Load the correct FXML based on role
+        FXMLLoader loader = null ;
+
+        if ("ADMIN".equalsIgnoreCase(roleName)) { // ADMIN
+            loader = new FXMLLoader(getClass().getResource("/com/example/testrepo/fxml/admin.fxml"));
+        } else if ("USER".equalsIgnoreCase(roleName)) { // USER
+            loader = new FXMLLoader(getClass().getResource("/com/example/testrepo/fxml/user.fxml"));
+        } else {
+            System.out.println("Not valid role: " + roleName);
+        }
+
+        Parent root = loader.load();
+        Stage stage = (Stage) loginUsernameTextField.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
