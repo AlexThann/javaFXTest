@@ -155,20 +155,29 @@ public class loginScreenController {
         String password = hiddenLoginPasswordField.getText();
 
         String roleName = null;
+        String hashedPassword=null;
         // Checking for match and getting the role
         try {
-            String sql = "SELECT r.role_name FROM users u JOIN roles r ON u.role_id = r.role_id WHERE u.username = ? AND u.password = ?";
+            String sql = "SELECT u.password,r.role_name FROM users u JOIN roles r ON u.role_id = r.role_id WHERE u.username = ?";
             PreparedStatement ps = con.prepareStatement(sql); // No sql injection
             ps.setString(1, username);
-            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) { // user exists
-                roleName = rs.getString("role_name");
+                hashedPassword = rs.getString("password");
+                if(BCrypt.checkpw(password,hashedPassword)){
+                    roleName = rs.getString("role_name");
+                }else {
+                    loginErrorLabel.setText("Incorrect Username or Password!");
+                    loginErrorLabel.setVisible(true);
+                    loginErrorLabel.setManaged(true);
+                    return;
+                }
             } else { // no match
                 loginErrorLabel.setText("Incorrect Username or Password!");
                 loginErrorLabel.setVisible(true);
                 loginErrorLabel.setManaged(true);
+                return;
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -184,6 +193,7 @@ public class loginScreenController {
             loader = new FXMLLoader(getClass().getResource("/com/example/testrepo/fxml/user.fxml"));
         } else {
             System.out.println("Not valid role: " + roleName);
+            return ;
         }
 
         Parent root = loader.load();
