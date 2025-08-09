@@ -11,40 +11,71 @@ import javafx.scene.layout.VBox;
 import java.sql.Connection;
 
 public class loginScreenController {
-
     @FXML
-    private PasswordField hiddenPasswordField;
+    private PasswordField hiddenLoginPasswordField;
     @FXML
-    private TextField showedPasswordField;
+    private TextField showedLoginPasswordField;
+    @FXML
+    private PasswordField hiddenNewPasswordField;
+    @FXML
+    private TextField showedNewPasswordField;
+    @FXML
+    private PasswordField hiddenConfirmPasswordField;
+    @FXML
+    private TextField showedConfirmPasswordField;
     @FXML
     private Button togglePasswordVisibilityButton;
+    @FXML
+    private Button toggleNewPasswordVisibilityButton;
+    @FXML
+    private Button toggleConfirmPasswordVisibilityButton;
     @FXML
     private VBox loginVBoxUI;
     @FXML
     private VBox registerVBoxUI;
 
+
     @FXML
     public void initialize() {
-        showedPasswordField.setManaged(false); // so it doesn’t take space when invisible
-        showedPasswordField.setVisible(false);
-        hiddenPasswordField.textProperty().bindBidirectional(showedPasswordField.textProperty());
-        showedPasswordField.setVisible(false);
+        //Initialize Password Fields
+        initPasswordVisibilityFields(hiddenLoginPasswordField, showedLoginPasswordField);
+        initPasswordVisibilityFields(hiddenNewPasswordField, showedNewPasswordField);
+        initPasswordVisibilityFields(hiddenConfirmPasswordField, showedConfirmPasswordField);
     }
+
+    private void initPasswordVisibilityFields(PasswordField hidden, TextField showed) {
+        showed.setManaged(false);
+        showed.setVisible(false);
+        hidden.textProperty().bindBidirectional(showed.textProperty());
+        showed.setVisible(false);
+    }
+
+    @FXML
     public void togglePasswordVisibility() {
-        if (showedPasswordField.isVisible()) {
-            // Hide plain text, show password field
-            showedPasswordField.setVisible(false);
-            showedPasswordField.setManaged(false);
-            hiddenPasswordField.setVisible(true);
-            hiddenPasswordField.setManaged(true);
-            togglePasswordVisibilityButton.setText("Show Password");
+        togglePasswordFields(hiddenLoginPasswordField, showedLoginPasswordField, togglePasswordVisibilityButton);
+    }
+    @FXML
+    public void toggleNewPasswordVisibility() {
+        togglePasswordFields(hiddenNewPasswordField, showedNewPasswordField, toggleNewPasswordVisibilityButton);
+    }
+    @FXML
+    public void toggleConfirmPasswordVisibility() {
+        togglePasswordFields(hiddenConfirmPasswordField, showedConfirmPasswordField, toggleConfirmPasswordVisibilityButton);
+    }
+
+    public void togglePasswordFields(PasswordField hidden,TextField showed,Button toggleButton) {
+        if (showed.isVisible()) {
+            showed.setVisible(false);
+            showed.setManaged(false);
+            hidden.setVisible(true);
+            hidden.setManaged(true);
+            toggleButton.setText("Show Password");
         } else {
-            // Show plain text, hide password field
-            showedPasswordField.setVisible(true);
-            showedPasswordField.setManaged(true);
-            hiddenPasswordField.setVisible(false);
-            hiddenPasswordField.setManaged(false);
-            togglePasswordVisibilityButton.setText("Hide Password");
+            showed.setVisible(true);
+            showed.setManaged(true);
+            hidden.setVisible(false);
+            hidden.setManaged(false);
+            toggleButton.setText("Hide Password");
         }
     }
 
