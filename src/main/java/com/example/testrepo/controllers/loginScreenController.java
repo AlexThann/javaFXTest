@@ -6,6 +6,7 @@ import com.example.testrepo.util.DbConnection;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 import java.sql.Connection;
 
@@ -28,6 +29,10 @@ public class loginScreenController {
     private Button toggleNewPasswordVisibilityButton;
     @FXML
     private Button toggleConfirmPasswordVisibilityButton;
+    @FXML
+    private VBox loginVBoxUI;
+    @FXML
+    private VBox registerVBoxUI;
 
 
     @FXML
@@ -72,6 +77,20 @@ public class loginScreenController {
             hidden.setManaged(false);
             toggleButton.setText("Hide Password");
         }
+    }
+
+    public void showLoginUI(){
+        loginVBoxUI.setVisible(true);
+        loginVBoxUI.setManaged(true);
+        registerVBoxUI.setVisible(false);
+        registerVBoxUI.setManaged(false);
+    }
+
+    public void showRegisterUI(){
+        loginVBoxUI.setVisible(false);
+        loginVBoxUI.setManaged(false);
+        registerVBoxUI.setVisible(true);
+        registerVBoxUI.setManaged(true);
     }
 
     public void loginUser() {

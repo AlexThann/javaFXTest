@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
    <children>
       <BorderPane prefHeight="559.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
             <AnchorPane prefHeight="528.0" prefWidth="478.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER" disable="true" layoutX="88.0" layoutY="93.0" prefHeight="294.0" prefWidth="306.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="100.0">
+                  <VBox fx:id="loginVBoxUI" alignment="CENTER" layoutX="88.0" layoutY="93.0" prefHeight="294.0" prefWidth="306.0" spacing="10.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="100.0">
                      <children>
                         <VBox>
                            <children>
@@ -56,7 +56,7 @@
                                     <Label text="Don't have an account?" textFill="#1278a4" />
                                     <AnchorPane>
                                        <children>
-                                          <Button id="register-button" mnemonicParsing="false" prefHeight="35.0" prefWidth="268.0" styleClass="login-register-buttons" text="REGISTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button id="register-button" mnemonicParsing="false" onAction="#showRegisterUI" prefHeight="35.0" prefWidth="268.0" styleClass="login-register-buttons" text="REGISTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -69,7 +69,7 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" layoutX="120.0" layoutY="79.0" prefHeight="342.0" prefWidth="242.0" spacing="10.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="60.0">
+                  <VBox fx:id="registerVBoxUI" alignment="CENTER" layoutX="120.0" layoutY="79.0" prefHeight="342.0" prefWidth="242.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="60.0">
                      <children>
                         <VBox>
                            <children>
@@ -128,7 +128,7 @@
                                     <Label text="Already have an account?" textFill="#1278a4" />
                                     <AnchorPane>
                                        <children>
-                                          <Button id="login-button" mnemonicParsing="false" onAction="#loginUser" prefHeight="35.0" prefWidth="268.0" styleClass="login-register-buttons" text="LOGIN" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Button id="login-button" mnemonicParsing="false" onAction="#showLoginUI" prefHeight="35.0" prefWidth="268.0" styleClass="login-register-buttons" text="LOGIN" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
