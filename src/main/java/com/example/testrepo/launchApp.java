@@ -16,10 +16,14 @@ public class launchApp extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Cinema Management System");
         stage.setScene(scene);
-        //setting the minimum size of the window
-        stage.setMinWidth(850);
-        stage.setMinHeight(550);
         stage.show();
+
+        // calculate sizes for window borders + title bar
+        double decorationWidth = stage.getWidth() - scene.getWidth();
+        double decorationHeight = stage.getHeight() - scene.getHeight();
+        // min window size
+        stage.setMinWidth(800 + decorationWidth);
+        stage.setMinHeight(500 + decorationHeight);
     }
 
     public static void main(String[] args) {
