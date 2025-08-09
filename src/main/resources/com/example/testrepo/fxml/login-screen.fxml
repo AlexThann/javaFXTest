@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
    <children>
       <BorderPane prefHeight="559.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
@@ -24,7 +24,7 @@
                         <VBox>
                            <children>
                               <Label prefHeight="25.0" prefWidth="306.0" styleClass="input-label" text="Enter Username:" />
-                              <TextField fx:id="loginUsernameTextField" prefHeight="33.0" prefWidth="324.0" promptText="Username" />
+                              <TextField fx:id="loginUsernameTextField" prefHeight="33.0" prefWidth="324.0" promptText="Username" styleClass="input-text-field" />
                            </children>
                         </VBox>
                         <VBox>
@@ -32,8 +32,8 @@
                               <Label prefHeight="26.0" prefWidth="306.0" styleClass="input-label" text="Enter Password:" />
                               <StackPane prefHeight="34.0" prefWidth="325.0">
                                  <children>
-                                    <PasswordField fx:id="hiddenLoginPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" />
-                                    <TextField fx:id="showedLoginPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" visible="false" />
+                                    <PasswordField fx:id="hiddenLoginPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" styleClass="input-text-field" />
+                                    <TextField fx:id="showedLoginPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" styleClass="input-text-field" visible="false" />
                                  </children>
                               </StackPane>
                               <Button fx:id="togglePasswordVisibilityButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#togglePasswordVisibility" prefHeight="18.0" prefWidth="79.0" styleClass="show-password-button" text="Show Password" />
@@ -74,13 +74,13 @@
                         <VBox>
                            <children>
                               <Label prefHeight="25.0" prefWidth="306.0" styleClass="input-label" text="Enter Full Name:" />
-                              <TextField fx:id="registerFullnameTextField" prefHeight="33.0" prefWidth="324.0" promptText="Full Name" />
+                              <TextField fx:id="registerFullnameTextField" prefHeight="33.0" prefWidth="324.0" promptText="Full Name" styleClass="input-text-field" />
                            </children>
                         </VBox>
                         <VBox>
                            <children>
                               <Label prefHeight="25.0" prefWidth="306.0" styleClass="input-label" text="Enter Username:" />
-                              <TextField fx:id="registerUsernameTextField" prefHeight="33.0" prefWidth="324.0" promptText="Username" />
+                              <TextField fx:id="registerUsernameTextField" prefHeight="33.0" prefWidth="324.0" promptText="Username" styleClass="input-text-field" />
                            </children>
                         </VBox>
                         <VBox>
@@ -88,8 +88,8 @@
                               <Label prefHeight="26.0" prefWidth="306.0" styleClass="input-label" text="Enter Password:" />
                               <StackPane prefHeight="34.0" prefWidth="325.0">
                                  <children>
-                                    <PasswordField fx:id="hiddenNewPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" />
-                                    <TextField fx:id="showedNewPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" visible="false" />
+                                    <PasswordField fx:id="hiddenNewPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" styleClass="input-text-field" />
+                                    <TextField fx:id="showedNewPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" styleClass="input-text-field" visible="false" />
                                  </children>
                               </StackPane>
                               <Button fx:id="toggleNewPasswordVisibilityButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#toggleNewPasswordVisibility" prefHeight="18.0" prefWidth="79.0" styleClass="show-password-button" text="Show Password" />
@@ -100,8 +100,8 @@
                               <Label prefHeight="26.0" prefWidth="306.0" styleClass="input-label" text="Confirm Password:" />
                               <StackPane prefHeight="34.0" prefWidth="325.0">
                                  <children>
-                                    <PasswordField fx:id="hiddenConfirmPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" />
-                                    <TextField fx:id="showedConfirmPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" visible="false" />
+                                    <PasswordField fx:id="hiddenConfirmPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" styleClass="input-text-field" />
+                                    <TextField fx:id="showedConfirmPasswordField" prefHeight="33.0" prefWidth="324.0" promptText="Password" styleClass="input-text-field" visible="false" />
                                  </children>
                               </StackPane>
                               <Button fx:id="toggleConfirmPasswordVisibilityButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#toggleConfirmPasswordVisibility" prefHeight="18.0" prefWidth="79.0" styleClass="show-password-button" text="Show Password" />
