@@ -2,6 +2,7 @@ module com.example.testrepo {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires jbcrypt;
 
 
     opens com.example.testrepo to javafx.fxml;

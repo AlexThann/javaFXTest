@@ -111,10 +111,10 @@
                            <children>
                               <VBox>
                                  <children>
-                                    <Label styleClass="error-label" text="Passwords do not match/ User alreasy exists" />
+                                    <Label fx:id="registerErrorLabel" styleClass="error-label" />
                                     <AnchorPane>
                                        <children>
-                                          <Button id="register-button" mnemonicParsing="false" prefHeight="35.0" prefWidth="268.0" styleClass="login-register-buttons" text="CREATE ACCOUNT" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button id="register-button" mnemonicParsing="false" onAction="#registerUser" prefHeight="35.0" prefWidth="268.0" styleClass="login-register-buttons" text="CREATE ACCOUNT" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
