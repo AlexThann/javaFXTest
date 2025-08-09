@@ -1,6 +1,8 @@
 *{
     -fx-primary-red:#DC1A23;
+    -fx-primary-deep-red:#AB1A42;
     -fx-primary-purple:#751A5E;
+    -fx-primary-deep-purple: #41187D;
     -fx-primary-blue:#0D179A;
 }
 
@@ -58,28 +60,20 @@
 
 .input-text-field {
     -fx-font-size: 13px;
-    -fx-text-fill: black;
-    -fx-prompt-text-fill: black;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #999999;
     -fx-background-color: transparent;
-    -fx-border-color: gray;
+    -fx-border-color: #cccccc;
     -fx-border-width: 0 0 1.5 0;
-    -fx-border-insets: 0 0 1 0;
     -fx-border-style: solid;
 }
 .input-text-field:hover{
-    -fx-border-color:#8bcdfc;
+    -fx-border-color: #888888;
 }
 
 .input-text-field:focused {
-    /*
-    highlight fill and text fill is for when clicking over it lol    */
-    -fx-highlight-fill: rgba(188, 188, 188, 0.33);
-    -fx-highlight-text-fill: white;
-    -fx-text-fill: white;
-    -fx-background-color: transparent;
-    -fx-border-width: 0 0 2.35 0;
-    -fx-border-insets: 0 0 2 -1;
+    -fx-border-color: #999999;
+    -fx-border-width: 0 0 1.5 0;
     -fx-prompt-text-fill: transparent;
-    -fx-border-color:#8bcdfc;
 
 }

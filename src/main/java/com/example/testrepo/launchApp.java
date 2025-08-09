@@ -17,6 +17,8 @@ public class launchApp extends Application {
         stage.setTitle("Cinema Management System");
         stage.setScene(scene);
         stage.show();
+        // get focus away from first field
+        scene.getRoot().requestFocus();
 
         // calculate sizes for window borders + title bar
         double decorationWidth = stage.getWidth() - scene.getWidth();

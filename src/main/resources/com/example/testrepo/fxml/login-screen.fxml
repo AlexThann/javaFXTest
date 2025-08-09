@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
    <children>
       <BorderPane prefHeight="559.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
@@ -69,7 +69,7 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="registerVBoxUI" alignment="CENTER" layoutX="120.0" layoutY="79.0" prefHeight="342.0" prefWidth="242.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="60.0">
+                  <VBox fx:id="registerVBoxUI" alignment="CENTER" layoutX="120.0" layoutY="79.0" prefHeight="342.0" prefWidth="242.0" spacing="15.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="60.0">
                      <children>
                         <VBox>
                            <children>
@@ -143,16 +143,20 @@
          <center>
             <AnchorPane prefHeight="528.0" prefWidth="322.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox id="welcome-pane-background" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="528.0" prefWidth="266.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
+                  <VBox id="welcome-pane-background" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="528.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
-                     <ImageView fitHeight="154.0" fitWidth="247.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitHeight="146.0" fitWidth="225.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@../images/loginLogo.png" />
                         </image>
                      </ImageView>
-                     <Label id="welcome-label" alignment="CENTER" prefHeight="27.0" prefWidth="159.0" text="Welcome" />
+                     <Label prefHeight="38.0" prefWidth="147.0" text="Welcome!" textFill="#cc2554d8">
+                        <font>
+                           <Font name="Bauhaus 93" size="32.0" />
+                        </font>
+                     </Label>
                   </VBox>
                </children>
             </AnchorPane>
