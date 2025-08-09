@@ -24,7 +24,7 @@
                         <VBox>
                            <children>
                               <Label prefHeight="25.0" prefWidth="306.0" styleClass="input-label" text="Enter Username:" />
-                              <TextField prefHeight="33.0" prefWidth="324.0" promptText="Username" />
+                              <TextField fx:id="loginUsernameTextField" prefHeight="33.0" prefWidth="324.0" promptText="Username" />
                            </children>
                         </VBox>
                         <VBox>
@@ -74,13 +74,13 @@
                         <VBox>
                            <children>
                               <Label prefHeight="25.0" prefWidth="306.0" styleClass="input-label" text="Enter Full Name:" />
-                              <TextField prefHeight="33.0" prefWidth="324.0" promptText="Full Name" />
+                              <TextField fx:id="registerFullnameTextField" prefHeight="33.0" prefWidth="324.0" promptText="Full Name" />
                            </children>
                         </VBox>
                         <VBox>
                            <children>
                               <Label prefHeight="25.0" prefWidth="306.0" styleClass="input-label" text="Enter Username:" />
-                              <TextField prefHeight="33.0" prefWidth="324.0" promptText="Username" />
+                              <TextField fx:id="registerUsernameTextField" prefHeight="33.0" prefWidth="324.0" promptText="Username" />
                            </children>
                         </VBox>
                         <VBox>

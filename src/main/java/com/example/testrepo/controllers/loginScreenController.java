@@ -24,6 +24,14 @@ public class loginScreenController {
     @FXML
     private TextField showedConfirmPasswordField;
     @FXML
+    private TextField loginUsernameTextField;
+
+    @FXML
+    private TextField registerFullnameTextField;
+    @FXML
+    private TextField registerUsernameTextField;
+
+    @FXML
     private Button togglePasswordVisibilityButton;
     @FXML
     private Button toggleNewPasswordVisibilityButton;
@@ -80,6 +88,12 @@ public class loginScreenController {
     }
 
     public void showLoginUI(){
+        registerFullnameTextField.setText("");
+        registerUsernameTextField.setText("");
+        hiddenNewPasswordField.setText("");
+        showedNewPasswordField.setText("");
+        hiddenConfirmPasswordField.setText("");
+        showedConfirmPasswordField.setText("");
         loginVBoxUI.setVisible(true);
         loginVBoxUI.setManaged(true);
         registerVBoxUI.setVisible(false);
@@ -87,6 +101,8 @@ public class loginScreenController {
     }
 
     public void showRegisterUI(){
+        loginUsernameTextField.setText("");
+        hiddenLoginPasswordField.setText("");
         loginVBoxUI.setVisible(false);
         loginVBoxUI.setManaged(false);
         registerVBoxUI.setVisible(true);
