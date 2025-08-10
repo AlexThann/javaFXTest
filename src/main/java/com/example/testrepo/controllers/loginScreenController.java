@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -40,6 +41,8 @@ public class loginScreenController {
     private TextField loginUsernameTextField;
 
     @FXML
+    private Label welcomeLabel;
+    @FXML
     private TextField registerFullnameTextField;
     @FXML
     private TextField registerUsernameTextField;
@@ -61,6 +64,11 @@ public class loginScreenController {
 
     @FXML
     public void initialize() {
+        // load font for welcome label
+        Font bauhaus = Font.loadFont(
+                getClass().getResourceAsStream("/com/example/testrepo/fonts/bauhaus.ttf"), 32
+        );
+        welcomeLabel.setFont(bauhaus);
         //Initialize Password Fields
         initializeInputLimits();
         initPasswordVisibilityFields(hiddenLoginPasswordField, showedLoginPasswordField);
@@ -98,6 +106,7 @@ public class loginScreenController {
     public void toggleConfirmPasswordVisibility() {
         togglePasswordFields(hiddenConfirmPasswordField, showedConfirmPasswordField, toggleConfirmPasswordVisibilityButton);
     }
+
 
 
     public void togglePasswordFields(PasswordField hidden,TextField showed,Button toggleButton) {

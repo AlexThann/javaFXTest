@@ -1,3 +1,7 @@
+@font-face {
+    src: url("../fonts/bauhaus.ttf");
+}
+
 *{
     -fx-primary-red:#DC1A23;
     -fx-primary-deep-red:#AB1A42;
@@ -7,9 +11,9 @@
 }
 
 #welcome-label{
+    -fx-font-family:"Bauhaus 93";
     -fx-text-fill: #f02654;
-    -fx-font-size:18px;
-    -fx-font-style:italic;
+    -fx-font-size:32px;
     -fx-font-weight:bold;
 }
 

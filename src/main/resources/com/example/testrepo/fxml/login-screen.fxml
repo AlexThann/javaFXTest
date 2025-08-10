@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../css/login_screen.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.loginScreenController">
    <children>
       <BorderPane prefHeight="559.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <right>
@@ -152,7 +152,7 @@
                            <Image url="@../images/loginLogo.png" />
                         </image>
                      </ImageView>
-                     <Label prefHeight="38.0" prefWidth="147.0" text="Welcome!" textFill="#cc2554d8">
+                     <Label fx:id="welcomeLabel" prefHeight="47.0" prefWidth="147.0" text="Welcome!" textFill="#cc2554d8">
                         <font>
                            <Font name="Bauhaus 93" size="32.0" />
                         </font>
