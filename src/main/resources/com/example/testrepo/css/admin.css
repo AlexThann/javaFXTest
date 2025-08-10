@@ -1,0 +1,46 @@
+*{
+    -fx-primary-red:#DC1A23;
+    -fx-primary-deep-red:#AB1A42;
+    -fx-primary-purple:#751A5E;
+    -fx-primary-deep-purple: #41187D;
+    -fx-primary-blue:#0D179A;
+
+    -fx-darker-primary-blue:derive(-fx-primary-blue, -45%);
+    -fx-darker-primary-red:derive(-fx-primary-red, -45%);
+    -fx-darker-primary-purple:derive(-fx-primary-purple, -45%);
+
+
+}
+
+
+#menu-bar {
+    -fx-background-color:
+            rgba(0, 0, 0, 0.1), /* top layer: dark transparent */
+            linear-gradient(
+                    to bottom,
+                    -fx-darker-primary-blue 0%,
+                    -fx-darker-primary-blue 70%,
+                    -fx-darker-primary-purple 95%,
+                    -fx-darker-primary-red 100%
+            );
+    -fx-padding:40px 0px 0px 0px;
+}
+
+#dashboard-main-bg-body{
+    -fx-background-color: linear-gradient(
+            to bottom,
+            -fx-primary-blue 0%,      /* Start with blue */
+            -fx-primary-blue 70%,     /* Stay blue for 80% of the gradient */
+            -fx-primary-purple 95%,   /* Transition to purple in next 10% */
+            -fx-primary-red 100%      /* End with red at the top */
+    );
+}
+
+.menu-icons{
+    -fx-content-display:TOP;
+    -fx-background-color:transparent;
+    -fx-padding:0px;
+    -fx-cursor: hand;
+    -fx-text-fill:white;
+}
+
