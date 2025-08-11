@@ -9,6 +9,8 @@
     -fx-darker-primary-red:derive(-fx-primary-red, -45%);
     -fx-darker-primary-purple:derive(-fx-primary-purple, -45%);
 
+    -fx-container-blue:derive(-fx-primary-blue,-30%);
+    -fx-container-darker-blue:derive(-fx-primary-blue,-80%);
 
 }
 
@@ -44,3 +46,91 @@
     -fx-text-fill:white;
 }
 
+.dashboard-container{
+    -fx-background-color:linear-gradient(
+            to bottom right,
+            -fx-container-blue,
+            -fx-container-darker-blue/* End with red at the top */
+    );
+    -fx-background-radius:15px;
+
+}
+
+
+
+
+/*
+#today-schedule-table {
+    -fx-font-size:13px;
+    -fx-focus-color:transparent;
+    -fx-faint-focus-color:transparent;
+    -fx-background-insets:0;
+    -fx-background-color:white;
+    -fx-border-color:transparent;
+    -fx-background-insets:0;
+    -fx-border-insets:0;
+}
+#today-schedule-table .column-header-background{
+    -fx-padding:6px 0 6px 0px;
+    -fx-background-color: #ecf2f8;
+    -fx-background-insets: 0;
+}
+#today-schedule-table .column-header{
+
+    -fx-background-color: transparent;
+    -fx-border-color:transparent;
+    -fx-background-insets: 0;
+}
+
+#today-schedule-table .column-header .label{
+    -fx-alignment:CENTER_LEFT;
+    -fx-padding:0 0 0 30px;
+}
+#category-column{
+    -fx-text-fill:#363636;
+}
+#amount-column{
+    -fx-text-fill:red;
+}
+
+#date-column{
+    -fx-text-fill:#363636;
+}
+
+#delete-column{
+    -fx-padding:0;
+}
+
+#label-column{
+    -fx-font-weight:bold;
+    -fx-alignment:CENTER_LEFT;
+}
+
+
+#today-schedule-table .column-header-background .filler {
+    -fx-background-color: #ecf2f8;
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #f3f3f3;
+}
+
+.table-cell{
+    -fx-padding:0 0 0 30px;
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-text-fill: black;
+}
+
+
+.table-row-cell{
+    -fx-background-color:white;
+    -fx-background-insets:0;
+    -fx-padding:7px 0 7px 0;
+}
+
+.table-row-cell:filled{
+    -fx-border-color:transparent transparent #e5e5e5 transparent;
+}
+
+
+ */
