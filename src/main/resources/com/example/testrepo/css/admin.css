@@ -28,7 +28,7 @@
     -fx-padding:40px 0px 0px 0px;
 }
 
-#dashboard-main-bg-body{
+.admin-main-bg-body{
     -fx-background-color: linear-gradient(
             to bottom,
             -fx-primary-blue 0%,      /* Start with blue */

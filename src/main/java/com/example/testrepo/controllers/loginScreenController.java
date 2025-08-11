@@ -181,14 +181,17 @@ public class loginScreenController {
                     loginErrorLabel.setText("Incorrect Username or Password!");
                     loginErrorLabel.setVisible(true);
                     loginErrorLabel.setManaged(true);
+                    con.close();
                     return;
                 }
             } else { // no match
                 loginErrorLabel.setText("Incorrect Username or Password!");
                 loginErrorLabel.setVisible(true);
                 loginErrorLabel.setManaged(true);
+                con.close();
                 return;
             }
+            con.close();
         }catch (SQLException e) {
             e.printStackTrace();
             return;
@@ -206,10 +209,12 @@ public class loginScreenController {
             return ;
         }
 
+
         Parent root = loader.load();
         Stage stage = (Stage) loginUsernameTextField.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+
 
     }
 
