@@ -1,4 +1,4 @@
-package com.example.testrepo.controllers;
+package com.example.testrepo.controllers.admin;
 
 import javafx.fxml.FXML;
 
@@ -8,8 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -19,12 +17,8 @@ public class adminController {
 
     @FXML
     private AnchorPane rootAnchorPane;
-
     @FXML
-    private VBox dashboardVBox,scheduleVBox,salesVBox;
-
-    @FXML
-    private HBox moviesHBox;
+    private AnchorPane dashboardPane,schedulePane,moviesPane,salesPane;
 
     private Node currentVisibleOption;
 
@@ -35,7 +29,7 @@ public class adminController {
         // Result is Set<node>
         // lambda expression to call the function
         rootAnchorPane.lookupAll(".menu-icons").forEach(node -> addHoverScaleEffect(node));
-        currentVisibleOption=moviesHBox;
+        currentVisibleOption=moviesPane;
     }
 
     private void changeMenu(Node showMenu){
@@ -47,20 +41,20 @@ public class adminController {
     }
     @FXML
     private void showDashboard(){
-        changeMenu(dashboardVBox);
+        changeMenu(dashboardPane);
     }
     @FXML
     private void showMovies(){
-        changeMenu(moviesHBox);
+        changeMenu(moviesPane);
     }
     @FXML
     private void showSchedule(){
-        changeMenu(scheduleVBox);
+        changeMenu(schedulePane);
     }
 
     @FXML
     private void showSales(){
-        changeMenu(salesVBox);
+        changeMenu(salesPane);
     }
 
     // Func for button animation
