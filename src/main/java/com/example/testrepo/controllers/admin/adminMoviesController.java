@@ -35,7 +35,7 @@ public class adminMoviesController {
     @FXML
         private AnchorPane rootAnchorPane;
     @FXML
-    private TextField movieTitleField,genreField,releaseDateField,durationField;
+    private TextField movieTitleField,genreField,durationField;
 
     @FXML
     private TextArea descriptionField;
@@ -66,10 +66,6 @@ public class adminMoviesController {
         MovieEditingTextFieldsVBox.setScaleY(initialScale); // textfields change only height
 
     }
-
-//    public void setRootAnchorPane(AnchorPane main){
-//        rootAnchorPane = main;
-//    }
 
     private Stage getStage(){
         return (Stage) imagePoster.getScene().getWindow();
