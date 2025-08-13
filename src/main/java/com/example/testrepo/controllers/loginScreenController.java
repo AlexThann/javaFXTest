@@ -201,9 +201,9 @@ public class loginScreenController {
         FXMLLoader loader=null;
 
         if ("ADMIN".equalsIgnoreCase(roleName)) { // ADMIN
-            loader = new FXMLLoader(getClass().getResource("/com/example/testrepo/fxml/admin.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/com/example/testrepo/fxml/admin/admin.fxml"));
         } else if ("USER".equalsIgnoreCase(roleName)) { // USER
-            loader = new FXMLLoader(getClass().getResource("/com/example/testrepo/fxml/user.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/com/example/testrepo/fxml/user/user.fxml"));
         } else {
             System.out.println("Not valid role: " + roleName);
             return ;

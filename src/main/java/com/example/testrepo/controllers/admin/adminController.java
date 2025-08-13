@@ -1,5 +1,9 @@
-package com.example.testrepo.controllers;
+package com.example.testrepo.controllers.admin;
 
+import com.example.testrepo.controllers.admin.adminMoviesController;
+import com.example.testrepo.controllers.admin.adminDashboardController;
+import com.example.testrepo.controllers.admin.adminSalesController;
+import com.example.testrepo.controllers.admin.adminScheduleController;
 import javafx.fxml.FXML;
 
 import javafx.animation.ScaleTransition;
@@ -7,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -15,18 +20,34 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
+// new for scaling
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
+import java.util.List;
+import java.util.ArrayList;
+
 public class adminController {
 
     @FXML
     private AnchorPane rootAnchorPane;
-
     @FXML
-    private VBox dashboardVBox,scheduleVBox,salesVBox;
-
-    @FXML
-    private HBox moviesHBox;
+    private AnchorPane dashboardPane,schedulePane,moviesPane,salesPane;
 
     private Node currentVisibleOption;
+
+    // Controllers for each sub-menu
+    @FXML
+    private adminMoviesController moviesUIController;
+
+    @FXML
+    private adminSalesController salesUIController;
+
+    @FXML
+    private adminScheduleController scheduleUIController;
+
+    @FXML
+    private adminDashboardController dashboardUIController;
 
 
     @FXML
@@ -35,7 +56,8 @@ public class adminController {
         // Result is Set<node>
         // lambda expression to call the function
         rootAnchorPane.lookupAll(".menu-icons").forEach(node -> addHoverScaleEffect(node));
-        currentVisibleOption=moviesHBox;
+        currentVisibleOption=moviesPane;
+        //moviesUIController.setRootAnchorPane(rootAnchorPane);
     }
 
     private void changeMenu(Node showMenu){
@@ -47,20 +69,20 @@ public class adminController {
     }
     @FXML
     private void showDashboard(){
-        changeMenu(dashboardVBox);
+        changeMenu(dashboardPane);
     }
     @FXML
     private void showMovies(){
-        changeMenu(moviesHBox);
+        changeMenu(moviesPane);
     }
     @FXML
     private void showSchedule(){
-        changeMenu(scheduleVBox);
+        changeMenu(schedulePane);
     }
 
     @FXML
     private void showSales(){
-        changeMenu(salesVBox);
+        changeMenu(salesPane);
     }
 
     // Func for button animation
