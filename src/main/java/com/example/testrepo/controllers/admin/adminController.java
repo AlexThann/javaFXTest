@@ -1,5 +1,9 @@
 package com.example.testrepo.controllers.admin;
 
+import com.example.testrepo.controllers.admin.adminMoviesController;
+import com.example.testrepo.controllers.admin.adminDashboardController;
+import com.example.testrepo.controllers.admin.adminSalesController;
+import com.example.testrepo.controllers.admin.adminScheduleController;
 import javafx.fxml.FXML;
 
 import javafx.animation.ScaleTransition;
@@ -22,6 +26,18 @@ public class adminController {
 
     private Node currentVisibleOption;
 
+    // Controllers for each sub-menu
+    @FXML
+    private adminMoviesController moviesUIController;
+
+    @FXML
+    private adminSalesController salesUIController;
+
+    @FXML
+    private adminScheduleController scheduleUIController;
+
+    @FXML
+    private adminDashboardController dashboardUIController;
 
     @FXML
     public void initialize() {
@@ -30,6 +46,7 @@ public class adminController {
         // lambda expression to call the function
         rootAnchorPane.lookupAll(".menu-icons").forEach(node -> addHoverScaleEffect(node));
         currentVisibleOption=moviesPane;
+
     }
 
     private void changeMenu(Node showMenu){

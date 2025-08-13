@@ -4,6 +4,9 @@ import com.example.testrepo.models.Movie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -15,14 +18,23 @@ public class adminMoviesController {
 
 
     private ObservableList<Movie> movies = FXCollections.observableArrayList();
-    private Movie currentMovie;
+
+    private String posterUrlPath= null;
+
+    @FXML
+    private TextField movieTitleField,genreField,releaseDateField,durationField;
+
+    @FXML
+    private TextArea descriptionField;
+
+    @FXML
+    private Label errorMovieLabel;
 
     @FXML
     private ImageView imagePoster;
 
     @FXML
     private void initialize() {
-        currentMovie = new Movie();
     }
 
     private Stage getStage(){
@@ -41,11 +53,14 @@ public class adminMoviesController {
         File selectedFile = fileChooser.showOpenDialog(getStage());
         // could be kinda useless. will see
         if (selectedFile != null) {
-            if (currentMovie == null) currentMovie = new Movie();
-            String path = selectedFile.getAbsolutePath();
-            currentMovie.setPosterUrl(path);
-            System.out.println(currentMovie.getPosterUrl());
-            imagePoster.setImage(new Image(path, imagePoster.getFitWidth(), imagePoster.getFitHeight(), false, false));
+            posterUrlPath = selectedFile.getAbsolutePath();
+            imagePoster.setImage(new Image(posterUrlPath, imagePoster.getFitWidth(), imagePoster.getFitHeight(), false, false));
         }
     }
+
+    @FXML
+    private void addMovie(){
+        System.out.println("HELLO");
+    }
+
 }

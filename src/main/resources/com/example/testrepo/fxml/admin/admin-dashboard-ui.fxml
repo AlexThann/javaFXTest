@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="467.0" prefWidth="646.0" styleClass="admin-main-bg-body" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="467.0" prefWidth="646.0" styleClass="admin-main-bg-body" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.admin.adminDashboardController">
    <children>
       <AnchorPane prefHeight="30.0" prefWidth="699.0">
          <children>
