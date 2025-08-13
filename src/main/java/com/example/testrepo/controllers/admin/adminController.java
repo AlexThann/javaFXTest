@@ -1,5 +1,9 @@
-package com.example.testrepo.controllers;
+package com.example.testrepo.controllers.admin;
 
+import com.example.testrepo.controllers.admin.adminMoviesController;
+import com.example.testrepo.controllers.admin.adminDashboardController;
+import com.example.testrepo.controllers.admin.adminSalesController;
+import com.example.testrepo.controllers.admin.adminScheduleController;
 import javafx.fxml.FXML;
 
 import javafx.animation.ScaleTransition;
@@ -27,17 +31,24 @@ public class adminController {
 
     @FXML
     private AnchorPane rootAnchorPane;
-
     @FXML
-    private VBox dashboardVBox,scheduleVBox,salesVBox,MovieEditingVBox,MovieEditingTextFieldsVBox;
-
-    @FXML
-    private HBox moviesHBox,movieEditingButtonsHBox;
+    private AnchorPane dashboardPane,schedulePane,moviesPane,salesPane;
 
     private Node currentVisibleOption;
 
-    private final double baseWidth = 800;  // your design width
-    private final double baseHeight = 600; // your design height
+    // Controllers for each sub-menu
+    @FXML
+    private adminMoviesController moviesUIController;
+
+    @FXML
+    private adminSalesController salesUIController;
+
+    @FXML
+    private adminScheduleController scheduleUIController;
+
+    @FXML
+    private adminDashboardController dashboardUIController;
+
 
     @FXML
     public void initialize() {
@@ -45,22 +56,8 @@ public class adminController {
         // Result is Set<node>
         // lambda expression to call the function
         rootAnchorPane.lookupAll(".menu-icons").forEach(node -> addHoverScaleEffect(node));
-        currentVisibleOption=moviesHBox;
-        /// //////////////////////////////////////
-        ChangeListener<Number> sizeListener = (obs, oldVal, newVal) -> {
-            double scaleY = rootAnchorPane.getHeight() / baseHeight;
-            double scaleX = rootAnchorPane.getWidth() / baseWidth;
-            MovieEditingTextFieldsVBox.setScaleY(scaleY);// text fields change only height
-            movieEditingButtonsHBox.setScaleY(scaleY); // buttons change height and width
-            movieEditingButtonsHBox.setScaleX(scaleX);
-        };
-        rootAnchorPane.heightProperty().addListener(sizeListener);
-        // Initial scale
-        double initialScale = rootAnchorPane.getHeight() / baseHeight;
-        MovieEditingTextFieldsVBox.setScaleY(initialScale); // textfields change only height
-
-        movieEditingButtonsHBox.setScaleY(initialScale);// buttons change w and h
-        movieEditingButtonsHBox.setScaleX(initialScale);
+        currentVisibleOption=moviesPane;
+        //moviesUIController.setRootAnchorPane(rootAnchorPane);
     }
 
     private void changeMenu(Node showMenu){
@@ -69,24 +66,23 @@ public class adminController {
         showMenu.setVisible(true);
         showMenu.setManaged(true);
         currentVisibleOption=showMenu;
-
     }
     @FXML
     private void showDashboard(){
-        changeMenu(dashboardVBox);
+        changeMenu(dashboardPane);
     }
     @FXML
     private void showMovies(){
-        changeMenu(moviesHBox);
+        changeMenu(moviesPane);
     }
     @FXML
     private void showSchedule(){
-        changeMenu(scheduleVBox);
+        changeMenu(schedulePane);
     }
 
     @FXML
     private void showSales(){
-        changeMenu(salesVBox);
+        changeMenu(salesPane);
     }
 
     // Func for button animation
