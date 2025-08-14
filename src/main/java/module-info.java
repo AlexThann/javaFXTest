@@ -13,4 +13,6 @@ module com.example.testrepo {
     opens com.example.testrepo.controllers.user to javafx.fxml;
     exports com.example.testrepo.controllers.admin;
     opens com.example.testrepo.controllers.admin to javafx.fxml;
+    // x
+    opens com.example.testrepo.models to javafx.base;
 }

@@ -19,11 +19,11 @@
          <children>
             <VBox prefHeight="500.0" prefWidth="96.0" styleClass="dashboard-container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <TableView prefHeight="386.0" prefWidth="354.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="movieTable" prefHeight="386.0" prefWidth="354.0" VBox.vgrow="ALWAYS">
                      <columns>
-                        <TableColumn text="Title " />
-                        <TableColumn maxWidth="2000.0" prefWidth="60.0" text="Release Date" />
-                        <TableColumn maxWidth="2000.0" prefWidth="40.0" text="Duration" />
+                        <TableColumn fx:id="titleColumn" text="Title " />
+                        <TableColumn fx:id="releaseDate" maxWidth="2000.0" prefWidth="60.0" text="Release Date" />
+                        <TableColumn fx:id="durationColumn" maxWidth="2000.0" prefWidth="40.0" text="Duration" />
                      </columns>
                      <VBox.margin>
                         <Insets />

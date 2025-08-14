@@ -1,6 +1,10 @@
 package com.example.testrepo.models;
 
-import java.sql.Date;
+import com.example.testrepo.util.DbConnection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
 
 public class Movie {
     private int movieId;
@@ -67,4 +71,29 @@ public class Movie {
         this.posterUrl = posterUrl;
     }
 
+    public static ObservableList<Movie> getMovieDataFromDB() {
+        ObservableList<Movie> movieList = FXCollections.observableArrayList();
+
+        try (Connection conn = DbConnection.getConnection()) {
+            String sql = "SELECT title, description,genre, duration_minutes, release_date, image_url FROM movies";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Movie movie = new Movie();
+                movie.setTitle(rs.getString("title"));
+                movie.setDescription(rs.getString("description"));
+                movie.setGenre(rs.getString("genre"));
+                movie.setDurationMinutes(rs.getInt("duration_minutes"));
+                movie.setReleaseDate(rs.getDate("release_date"));
+                movie.setPosterUrl(rs.getString("image_url"));
+                movieList.add(movie);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return movieList;
     }
+}

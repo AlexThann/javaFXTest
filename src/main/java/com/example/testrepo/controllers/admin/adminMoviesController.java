@@ -1,14 +1,15 @@
 package com.example.testrepo.controllers.admin;
 
 import com.example.testrepo.models.Movie;
+import com.example.testrepo.util.DbConnection;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+//import javafx.scene.control.*;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +21,8 @@ import javafx.stage.Stage;
 //scaling
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.control.Button;
+
+import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -33,28 +35,35 @@ public class adminMoviesController {
 
     private String posterUrlPath= null;
     @FXML
-        private AnchorPane rootAnchorPane;
+    private AnchorPane rootAnchorPane;
     @FXML
     private TextField movieTitleField,genreField,durationField;
-
     @FXML
     private TextArea descriptionField;
-
     @FXML
     private Label errorMovieLabel;
-
     @FXML
     private ImageView imagePoster;
     @FXML
     private VBox MovieEditingTextFieldsVBox;
-
     @FXML
     private HBox moviesHBox,movieEditingButtonsHBox;
+    @FXML
+    private TableView<Movie> movieTable;
+    @FXML
+    private TableColumn<Movie, String> titleColumn;
+    @FXML
+    private TableColumn<Movie, Date> releaseDate;
+    @FXML
+    private TableColumn<Movie, Integer> durationColumn;
+
 
     private final double baseWidth = 900;  // your design width
     private final double baseHeight = 600; // your design height
     @FXML
     private void initialize() {
+        DbConnection dbConnection = new DbConnection();
+        fillTable();
         ChangeListener<Number> sizeListener = (obs, oldVal, newVal) -> {
             double scaleY = rootAnchorPane.getHeight() / baseHeight;
             double scaleX = rootAnchorPane.getWidth() / baseWidth;
@@ -93,4 +102,12 @@ public class adminMoviesController {
         System.out.println("HELLO");
     }
 
+    private void fillTable() {
+        // Fetch fresh data from Movie class
+        ObservableList<Movie> movieList = Movie.getMovieDataFromDB();
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        releaseDate.setCellValueFactory(new PropertyValueFactory<>("releaseDate"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<>("durationMinutes"));
+        movieTable.setItems(movieList);
+    }
 }
