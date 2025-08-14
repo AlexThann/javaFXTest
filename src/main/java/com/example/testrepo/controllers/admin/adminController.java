@@ -79,6 +79,7 @@ public class adminController {
     @FXML
     private void showSchedule(){
         changeMenu(schedulePane);
+        scheduleUIController.initializeScheduleUI();
     }
 
     @FXML

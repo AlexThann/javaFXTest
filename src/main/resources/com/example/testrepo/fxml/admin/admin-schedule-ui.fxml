@@ -11,19 +11,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="523.0" prefWidth="690.0" styleClass="admin-main-bg-body" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="523.0" prefWidth="690.0" styleClass="admin-main-bg-body" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.admin.adminScheduleController">
    <children>
       <AnchorPane prefHeight="193.0" prefWidth="690.0">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="dashboard-container" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
                <children>
-                  <ComboBox prefWidth="150.0" promptText="movie" />
-                  <DatePicker promptText="screendate" />
-                  <TextField promptText="starttime" />
-                  <TextField promptText="endtime" />
-                  <ComboBox prefWidth="150.0" promptText="screen room" />
-                  <TextField promptText="seats" />
-                  <Spinner />
+                  <ComboBox fx:id="selectMovieComboBox" prefWidth="150.0" promptText="movie" />
+                  <DatePicker fx:id="screenDatePicker" promptText="screendate" />
+                  <TextField fx:id="startTimeTextField" promptText="starttime" />
+                  <TextField fx:id="endTimeTextField" promptText="endtime" />
+                  <ComboBox fx:id="screenRoomComboBox" prefWidth="150.0" promptText="screen room" />
+                  <TextField fx:id="seatsTextField" promptText="seats" />
+                  <Spinner fx:id="ticketPriceSpinner" />
                </children>
             </HBox>
          </children>
@@ -32,11 +32,19 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" styleClass="dashboard-container" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
                <children>
-                  <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="scheduleTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="movieNameColumn" prefWidth="75.0" text="Movie Title" />
+                      <TableColumn fx:id="screenDateColumn" prefWidth="75.0" text="Screen Date" />
+                        <TableColumn fx:id="startTimeColumn" prefWidth="75.0" text="Start Time" />
+                        <TableColumn fx:id="endTimeColumn" prefWidth="75.0" text="End Time" />
+                        <TableColumn fx:id="screenRoomColumn" prefWidth="75.0" text="Screen Room" />
+                        <TableColumn fx:id="seatsColumn" prefWidth="75.0" text="Available Seats" />
+                        <TableColumn fx:id="ticketPriceColumn" prefWidth="75.0" text="Ticket Price" />
                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
