@@ -14,10 +14,10 @@ public class Schedule {
     private Time endTime;
     private Integer screenRoom;
     private Integer availableSeats;
-    private Float ticketPrice;
+    private Double ticketPrice;
 
 
-    public Schedule(Integer scheduleId, String movieName, Date screeningDate, Time startTime, Time endTime, Integer screenRoom, Integer availableSeats, Float ticketPrice) {
+    public Schedule(Integer scheduleId, String movieName, Date screeningDate, Time startTime, Time endTime, Integer screenRoom, Integer availableSeats, Double ticketPrice) {
         this.scheduleId = scheduleId;
         this.movieName = movieName;
         this.screeningDate = screeningDate;
@@ -84,11 +84,11 @@ public class Schedule {
         this.availableSeats = availableSeats;
     }
 
-    public Float getTicketPrice() {
+    public Double getTicketPrice() {
         return ticketPrice;
     }
 
-    public void setTicketPrice(Float ticketPrice) {
+    public void setTicketPrice(Double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
 

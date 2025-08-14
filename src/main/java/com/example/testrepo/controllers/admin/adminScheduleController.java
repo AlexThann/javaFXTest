@@ -1,6 +1,5 @@
 package com.example.testrepo.controllers.admin;
 
-import com.example.testrepo.models.Movie;
 import com.example.testrepo.models.Schedule;
 import com.example.testrepo.util.DbConnection;
 import javafx.collections.FXCollections;
@@ -53,7 +52,7 @@ public class adminScheduleController {
     private TableColumn<Schedule, Time> startTimeColumn,endTimeColumn;
 
     @FXML
-    private TableColumn<Schedule,Float> ticketPriceColumn;
+    private TableColumn<Schedule,Double> ticketPriceColumn;
 
     @FXML
     private TableColumn<Schedule, Integer> seatsColumn;
@@ -134,11 +133,70 @@ public class adminScheduleController {
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<Schedule,Time>("endTime"));
         screenRoomColumn.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("screenRoom"));
         seatsColumn.setCellValueFactory(new PropertyValueFactory<Schedule, Integer>("availableSeats"));
-        ticketPriceColumn.setCellValueFactory(new PropertyValueFactory<Schedule, Float>("ticketPrice"));
+        ticketPriceColumn.setCellValueFactory(new PropertyValueFactory<Schedule,Double>("ticketPrice"));
 
         scheduleTableView.setItems(scheduleList);
 
+        // Listener so when something is selected it appears on the text fields.
+        scheduleTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue!=null){
+                selectMovieComboBox.setValue(newValue.getMovieName());
+                screenDatePicker.setValue(newValue.getScreeningDate().toLocalDate());
+                startTimeTextField.setText(newValue.getStartTime().toString());
+                endTimeTextField.setText(newValue.getEndTime().toString());
+                screenRoomComboBox.setValue(newValue.getScreenRoom());
+                ticketPriceSpinner.getValueFactory().setValue(newValue.getTicketPrice());
+            }
+        });
+
     }
+    @FXML
+    private void editSchedule(){
+        if (checkValidValues()) {
+            return;
+        }
+        Schedule scheduleToEdit= scheduleTableView.getSelectionModel().getSelectedItem();
+        try{
+            Connection conn = dbConnection.getConnection();
+            Integer movieId = getMovieIdByName(conn,selectMovieComboBox.getValue());
+            if(movieId==null){
+                System.err.println("movie not found not found");
+            }
+            String editQuery = "update schedule set movie_id=?, screening_date=?,start_time=?,end_time=?,screen_room=?,available_seats=?,ticket_price=? where schedule_id=?;";
+            PreparedStatement ps = conn.prepareStatement(editQuery);
+            ps.setInt(1,movieId);
+            ps.setDate(2,Date.valueOf(screenDatePicker.getValue()));
+            ps.setTime(3,Time.valueOf(startTimeTextField.getText()));
+            ps.setTime(4,Time.valueOf(endTimeTextField.getText()));
+            ps.setInt(5,screenRoomComboBox.getValue());
+            ps.setInt(6,Integer.parseInt(seatsTextField.getText()));
+            ps.setDouble(7,ticketPriceSpinner.getValue());
+            ps.setInt(8,scheduleToEdit.getScheduleId());
+            ps.executeUpdate();
+            conn.close();
+            scheduleList.setAll(fetchScheduleFromDB());
+        }catch(SQLException e){
+            System.err.println(e + "Failed to edit schedule");
+        }
+    }
+
+    @FXML
+    private void deleteSchedule(){
+        Schedule scheduleToDelete= scheduleTableView.getSelectionModel().getSelectedItem();
+        try{
+            Connection con = dbConnection.getConnection();
+            String deleteScheduleQuery = "delete from schedule where schedule_id=?;";
+            PreparedStatement ps = con.prepareStatement(deleteScheduleQuery);
+            ps.setInt(1,scheduleToDelete.getScheduleId());
+            ps.executeUpdate();
+            con.close();
+            scheduleList.setAll(fetchScheduleFromDB());
+        }catch(SQLException e){
+            System.err.println(e + "Failed to delete schedule");
+        }
+    }
+
+
 
     @FXML
     private void addSchedule() {
@@ -191,7 +249,7 @@ public class adminScheduleController {
             ps.setTime(4, Time.valueOf(endTimeTextField.getText()));
             ps.setInt(5, screenRoomComboBox.getValue());
             ps.setInt(6, Integer.parseInt(seatsTextField.getText()));
-            ps.setFloat(7, ticketPriceSpinner.getValue().floatValue());
+            ps.setDouble(7, ticketPriceSpinner.getValue());
             ps.executeUpdate();
         }catch(SQLException e){
             System.err.println(e + "Failed to insert schedule");
@@ -244,7 +302,7 @@ public class adminScheduleController {
                 Time endScreeningTime = rs.getTime("end_time");
                 Integer screenRoom = rs.getInt("screen_room");
                 Integer availableSeats = rs.getInt("available_seats");
-                Float ticketPrice = rs.getFloat("ticket_price");
+                Double ticketPrice = rs.getDouble("ticket_price");
                 localScheduleList.add(new Schedule(scheduleId,movieName,screeningDate,startScreeningTime,endScreeningTime,screenRoom,availableSeats,ticketPrice));
 
             }

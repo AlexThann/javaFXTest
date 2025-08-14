@@ -59,8 +59,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#addSchedule" text="add" />
-                        <Button mnemonicParsing="false" text="delete" />
-                        <Button mnemonicParsing="false" text="edit" />
+                        <Button mnemonicParsing="false" onAction="#deleteSchedule" text="delete" />
+                        <Button mnemonicParsing="false" onAction="#editSchedule" text="edit" />
                      </children>
                   </HBox>
                </children>
