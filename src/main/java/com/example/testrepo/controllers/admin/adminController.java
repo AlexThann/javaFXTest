@@ -74,6 +74,7 @@ public class adminController {
     @FXML
     private void showMovies(){
         changeMenu(moviesPane);
+
     }
     @FXML
     private void showSchedule(){
