@@ -30,7 +30,7 @@ import java.io.File;
 
 public class adminMoviesController {
 
-
+    DbConnection dbConnection = new DbConnection();
     private ObservableList<Movie> movies = FXCollections.observableArrayList();
 
     private String posterUrlPath= null;
@@ -63,7 +63,7 @@ public class adminMoviesController {
     @FXML
     private void initialize() {
         DbConnection dbConnection = new DbConnection();
-        fillTable();
+        initializeMoviesTableView();
         ChangeListener<Number> sizeListener = (obs, oldVal, newVal) -> {
             double scaleY = rootAnchorPane.getHeight() / baseHeight;
             double scaleX = rootAnchorPane.getWidth() / baseWidth;
@@ -75,12 +75,13 @@ public class adminMoviesController {
         MovieEditingTextFieldsVBox.setScaleY(initialScale); // textfields change only height
 
     }
-
     private Stage getStage(){
         return (Stage) imagePoster.getScene().getWindow();
     }
 
-
+    public void initializeMoviesUI(){
+        //ObservableList<Movie> movieList = Movie.getMovieDataFromDB();
+    }
     @FXML
     private void importMoviePoster() {
         FileChooser fileChooser = new FileChooser();
@@ -102,12 +103,37 @@ public class adminMoviesController {
         System.out.println("HELLO");
     }
 
-    private void fillTable() {
+    private void initializeMoviesTableView() {
         // Fetch fresh data from Movie class
-        ObservableList<Movie> movieList = Movie.getMovieDataFromDB();
+        ObservableList<Movie> movieList = getMovieDataFromDB();
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         releaseDate.setCellValueFactory(new PropertyValueFactory<>("releaseDate"));
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("durationMinutes"));
+
         movieTable.setItems(movieList);
     }
+
+    public ObservableList<Movie> getMovieDataFromDB() {
+        ObservableList<Movie> movieList = FXCollections.observableArrayList();
+        try (Connection conn = DbConnection.getConnection()) {
+            String sql = "SELECT title, description,genre, duration_minutes, release_date, image_url FROM movies";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Movie movie = new Movie();
+                movie.setTitle(rs.getString("title"));
+                movie.setDescription(rs.getString("description"));
+                movie.setGenre(rs.getString("genre"));
+                movie.setDurationMinutes(rs.getInt("duration_minutes"));
+                movie.setReleaseDate(rs.getDate("release_date"));
+                movie.setPosterUrl(rs.getString("image_url"));
+                movieList.add(movie);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return movieList;
+    }
+
 }
