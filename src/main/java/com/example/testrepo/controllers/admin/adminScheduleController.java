@@ -7,19 +7,25 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 public class adminScheduleController {
 
     DbConnection dbConnection = new DbConnection();
 
-    ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
+    private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
     HashMap<Integer,Integer> roomAndSeatNumber = new HashMap<>();
 
     @FXML
-    private TextField endTimeTextField;
+    private Button addScheduleButton,editScheduleButton,deleteScheduleButton;
 
     @FXML
     private DatePicker screenDatePicker;
@@ -34,7 +40,7 @@ public class adminScheduleController {
     private ComboBox<String> selectMovieComboBox;
 
     @FXML
-    private TextField startTimeTextField;
+    private TextField startTimeTextField,endTimeTextField;
 
     @FXML
     private Spinner<Double> ticketPriceSpinner;
@@ -64,14 +70,62 @@ public class adminScheduleController {
     private Label scheduleErrorLabel;
 
     @FXML
+    private VBox parentVBox;
+
+    @FXML
     public void initialize(){
         initializeScheduleTableView();
+        initializeStaticMovieControls();
+    }
+
+
+    private void initializeStaticMovieControls(){
         initializeSpinner();
+        TextFormatter<Integer> onlyIntsFormatter = new TextFormatter<>(change -> {
+            // If the text contains anything other than digits, reject it
+            if (change.getControlNewText().matches("\\d*")) {
+                return change;
+            } else {
+                return null; // Reject the change
+            }
+        });
+        seatsTextField.setTextFormatter(onlyIntsFormatter);
+
         screenRoomComboBox.setOnAction((event) -> {
             Integer selectedRoom = screenRoomComboBox.getValue();
             seatsTextField.setText(String.valueOf(roomAndSeatNumber.get(selectedRoom)));
 
         });
+        initializeDatePicker();
+    }
+
+    private void initializeDatePicker(){
+        // This string converter is to set the date with a different format. dd/MM/yyyy
+        StringConverter<LocalDate> converterDate = new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter =
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        };
+        screenDatePicker.setConverter(converterDate);
+        screenDatePicker.setValue(LocalDate.now());
+        screenDatePicker.setEditable(false);
+
     }
 
     public void initializeScheduleUI(){
@@ -79,6 +133,8 @@ public class adminScheduleController {
         scheduleList.setAll(fetchScheduleFromDB());
         initializeScreenRoomComboBox();
         initializeMovieNameComboBox();
+        clearInputFields();
+        scheduleErrorLabel.setText("");
     }
 
     private void initializeMovieNameComboBox(){
@@ -124,6 +180,21 @@ public class adminScheduleController {
     private void initializeSpinner(){
         SpinnerValueFactory<Double> valueFac= new SpinnerValueFactory.DoubleSpinnerValueFactory(0,1000);
         ticketPriceSpinner.setValueFactory(valueFac);
+        Pattern validEditingState = Pattern.compile("(([1-9][0-9]?)|0)?(\\.[0-9]{0,2})?");
+        // This is used for the textFormatter for the amount spinner to have only values between 0.0-99.99.
+        UnaryOperator<TextFormatter.Change> filter = c -> {
+            String text = c.getControlNewText();
+            if (validEditingState.matcher(text).matches()) {
+                return c ;
+            } else {
+                return null ;
+            }
+        };
+
+
+        TextFormatter<Double> textFormatter = new TextFormatter<>(filter);
+        ticketPriceSpinner.getEditor().setTextFormatter(textFormatter);
+
     }
 
     private void initializeScheduleTableView(){
@@ -148,6 +219,14 @@ public class adminScheduleController {
                 ticketPriceSpinner.getValueFactory().setValue(newValue.getTicketPrice());
             }
         });
+
+        parentVBox.setOnMousePressed(event -> {
+            if (!scheduleTableView.equals(event.getSource())) {
+                scheduleTableView.getSelectionModel().clearSelection();
+            }});
+
+        editScheduleButton.disableProperty().bind(scheduleTableView.getSelectionModel().selectedItemProperty().isNull());
+        deleteScheduleButton.disableProperty().bind(scheduleTableView.getSelectionModel().selectedItemProperty().isNull());
 
     }
     @FXML
@@ -203,6 +282,7 @@ public class adminScheduleController {
         if (checkValidValues()) {
             return;
         }
+        scheduleErrorLabel.setText("");
         try {
             Connection con = dbConnection.getConnection();
             Integer movieId = getMovieIdByName(con, selectMovieComboBox.getValue());
@@ -235,6 +315,16 @@ public class adminScheduleController {
         }
         return null;
     }
+    @FXML
+    private void clearInputFields(){
+        selectMovieComboBox.getSelectionModel().clearSelection();
+        screenDatePicker.setValue(LocalDate.now());
+        startTimeTextField.setText("");
+        endTimeTextField.setText("");
+        screenRoomComboBox.getSelectionModel().clearSelection();
+        seatsTextField.setText("");
+        ticketPriceSpinner.getValueFactory().setValue(0.0);
+    }
 
     private void insertSchedule(Connection con, int movieId) {
         String insertQuery = """
@@ -257,17 +347,18 @@ public class adminScheduleController {
     }
 
     private boolean checkValidValues(){
+        Pattern validTimePattern = Pattern.compile("([01]\\d|2[0-3]):([0-5]\\d):([0-5]\\d)");
         if(selectMovieComboBox.getValue() == null){
             scheduleErrorLabel.setText("Please select a movie");
             return true;
         }else if(screenDatePicker.getValue() == null){
             scheduleErrorLabel.setText("Please select a screening date");
             return true;
-        }else if(startTimeTextField.getText().isEmpty()){
-            scheduleErrorLabel.setText("Please select a starting time");
+        }else if(startTimeTextField.getText().isEmpty() || !validTimePattern.matcher(startTimeTextField.getText()).matches()){
+            scheduleErrorLabel.setText("Please select a valid starting time (HH:MM:SS)");
             return true;
-        }else if(endTimeTextField.getText().isEmpty()){
-            scheduleErrorLabel.setText("Please select a ending time");
+        }else if(endTimeTextField.getText().isEmpty() ||  !validTimePattern.matcher(endTimeTextField.getText()).matches()){
+            scheduleErrorLabel.setText("Please select a valid ending time (HH:MM:SS)");
             return true;
         }else if(ticketPriceSpinner.getValue() == null){
             scheduleErrorLabel.setText("Please select a ticket price");
