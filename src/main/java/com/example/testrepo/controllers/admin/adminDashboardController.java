@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -48,10 +49,11 @@ public class adminDashboardController {
 
     @FXML
     private VBox parentVBox;
+    @FXML
+    private HBox dashboardImageHBox;
 
     @FXML
-    private StackPane carouselStackPane;
-    private int carouselIndex;
+    private ImageView dashboardImageView1, dashboardImageView2, dashboardImageView3;
 
     @FXML
     private List<Image> imageList = new ArrayList<>();
@@ -60,56 +62,54 @@ public class adminDashboardController {
     public void initialize() {
         System.out.println("hi");
         initializeTableView();
+        initializeImageList();
     }
 
     public void initializeDashboardUI(){
         todaysScheduleList.setAll(fetchTodaysScheduleFromDB());
-        initializeImageList();
+        //initializeImageList();
+        //populateImages();
     }
 
     private void initializeImageList(){
         List<Image> localImageList = new ArrayList<>();
         try{
             Connection conn=dbConnection.getConnection();
-            String fetchImages = "select image_url from movies";
+            String fetchImages = "SELECT image_url FROM movies ORDER BY movie_id DESC LIMIT 3;";
             PreparedStatement ps = conn.prepareStatement(fetchImages);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 localImageList.add(new Image(rs.getString("image_url")));
+                System.out.println(rs.getString("image_url"));
             }
             imageList=localImageList;
+            populateImages();
             conn.close();
         }catch(SQLException e){
-            System.err.println(e + "Unable to load images for the carousel");
+            System.err.println(e + "Unable to load images");
         }
-        if (!imageList.isEmpty()) {
-            carouselIndex = 0;
+    }
 
-            // First image
-            ImageView imageView = new ImageView(imageList.get(carouselIndex));
-            imageView.setFitWidth(100);
-            imageView.setFitHeight(200);
-            imageView.setPreserveRatio(true);
+    private void populateImages() {
+        Image defaultImage = new Image("file:///C:/Users/xenia/javaFXTest/src/main/resources/com/example/testrepo/images/default-poster.png");
 
-            carouselStackPane.getChildren().clear();
-            carouselStackPane.getChildren().add(imageView);
+        Image[] images = new Image[]{
+                imageList.size() > 0 ? imageList.get(0) : defaultImage,
+                imageList.size() > 1 ? imageList.get(1) : defaultImage,
+                imageList.size() > 2 ? imageList.get(2) : defaultImage
+        };
 
-            // Setup timeline for automatic switching
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(3.5), event -> {
-                        carouselIndex = (carouselIndex + 1) % imageList.size();
+        ImageView[] imageViews = new ImageView[]{dashboardImageView1, dashboardImageView2, dashboardImageView3};
 
-                        // Replace image
-                        ImageView newImageView = new ImageView(imageList.get(carouselIndex));
-                        newImageView.setFitWidth(100);
-                        newImageView.setFitHeight(200);
-                        newImageView.setPreserveRatio(true);
+//        double fixedWidth = 100;  // desired width
+//        double fixedHeight = 150; // desired height
 
-                        carouselStackPane.getChildren().setAll(newImageView);
-                    })
-            );
-            timeline.setCycleCount(Timeline.INDEFINITE);
-            timeline.play();
+        for (int i = 0; i < imageViews.length; i++) {
+            imageViews[i].setImage(images[i]);
+//            imageViews[i].setFitWidth(fixedWidth);
+//            imageViews[i].setFitHeight(fixedHeight);
+            imageViews[i].setPreserveRatio(false); // stretch to fit fixed size exactly
+            imageViews[i].setSmooth(true);         // smooth scaling
         }
     }
 
