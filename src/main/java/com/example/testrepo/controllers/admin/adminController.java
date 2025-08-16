@@ -75,7 +75,7 @@ public class adminController {
     @FXML
     private void showMovies(){
         changeMenu(moviesPane);
-        moviesUIController.initializeMoviesUI();
+        //moviesUIController.initializeMoviesUI();
 
     }
     @FXML
