@@ -2,9 +2,9 @@ package com.example.testrepo.controllers.user;
 
 import javafx.fxml.FXML;
 
-public class userController {
+public class userDetailedMoviesController {
     @FXML
     private void initialize(){
-        System.out.println("userController");
+        System.out.println("userDetailedMoviesController");
     }
 }

@@ -12,7 +12,7 @@ public class launchApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // path starts from resources folder.
-        FXMLLoader fxmlLoader = new FXMLLoader(launchApp.class.getResource("/com/example/testrepo/fxml/admin/admin.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(launchApp.class.getResource("/com/example/testrepo/fxml/user/user.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Cinema Management System");
         stage.setScene(scene);
