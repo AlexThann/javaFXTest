@@ -6,10 +6,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="467.0" prefWidth="646.0" styleClass="admin-main-bg-body" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.admin.adminDashboardController">
+<VBox fx:id="parentVBox" prefHeight="467.0" prefWidth="646.0" styleClass="admin-main-bg-body" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.admin.adminDashboardController">
    <children>
       <AnchorPane prefHeight="30.0" prefWidth="699.0">
          <children>
@@ -23,11 +23,19 @@
                   <VBox layoutX="14.0" layoutY="6.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
                      <children>
                         <Label text="Todays Schedule" textFill="WHITE" />
-                        <TableView id="today-schedule-table" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="todaysScheduleTableView" prefHeight="259.0" prefWidth="629.0" styleClass="schedule-table" VBox.vgrow="ALWAYS">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="movieNameColumn" prefWidth="176.0" text="Movie Title" />
+                              <TableColumn fx:id="screenDateColumn" prefWidth="69.0" text="Screen Date" />
+                              <TableColumn fx:id="startTimeColumn" prefWidth="75.0" text="Start Time" />
+                              <TableColumn fx:id="endTimeColumn" prefWidth="75.0" text="End Time" />
+                              <TableColumn fx:id="screenRoomColumn" prefWidth="75.0" text="Room" />
+                              <TableColumn fx:id="seatsColumn" prefWidth="75.0" text="Seats" />
+                              <TableColumn fx:id="ticketPriceColumn" prefWidth="75.0" text="Ticket Price" />
                            </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </children>
                   </VBox>
@@ -37,16 +45,19 @@
       </AnchorPane>
       <HBox alignment="CENTER" prefHeight="191.0" prefWidth="699.0" spacing="50.0" VBox.vgrow="SOMETIMES">
          <children>
-            <Pane prefHeight="191.0" prefWidth="284.0" styleClass="dashboard-container" HBox.hgrow="SOMETIMES">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="dashboard-container" HBox.hgrow="SOMETIMES">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </HBox.margin>
-            </Pane>
-            <Pane prefHeight="191.0" prefWidth="299.0" styleClass="dashboard-container" HBox.hgrow="SOMETIMES">
+               <children>
+                  <StackPane fx:id="carouselStackPane" prefHeight="134.0" prefWidth="198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="dashboard-container" HBox.hgrow="SOMETIMES">
                <HBox.margin>
                   <Insets bottom="10.0" right="10.0" top="10.0" />
                </HBox.margin>
-            </Pane>
+            </AnchorPane>
          </children>
       </HBox>
    </children>
