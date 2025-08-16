@@ -71,29 +71,29 @@ public class Movie {
         this.posterUrl = posterUrl;
     }
 
-    public static ObservableList<Movie> getMovieDataFromDB() {
-        ObservableList<Movie> movieList = FXCollections.observableArrayList();
-
-        try (Connection conn = DbConnection.getConnection()) {
-            String sql = "SELECT title, description,genre, duration_minutes, release_date, image_url FROM movies";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Movie movie = new Movie();
-                movie.setTitle(rs.getString("title"));
-                movie.setDescription(rs.getString("description"));
-                movie.setGenre(rs.getString("genre"));
-                movie.setDurationMinutes(rs.getInt("duration_minutes"));
-                movie.setReleaseDate(rs.getDate("release_date"));
-                movie.setPosterUrl(rs.getString("image_url"));
-                movieList.add(movie);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return movieList;
-    }
+//    public static ObservableList<Movie> getMovieDataFromDB() {
+//        ObservableList<Movie> movieList = FXCollections.observableArrayList();
+//
+//        try (Connection conn = DbConnection.getConnection()) {
+//            String sql = "SELECT title, description,genre, duration_minutes, release_date, image_url FROM movies";
+//            PreparedStatement stmt = conn.prepareStatement(sql);
+//            ResultSet rs = stmt.executeQuery();
+//
+//            while (rs.next()) {
+//                Movie movie = new Movie();
+//                movie.setTitle(rs.getString("title"));
+//                movie.setDescription(rs.getString("description"));
+//                movie.setGenre(rs.getString("genre"));
+//                movie.setDurationMinutes(rs.getInt("duration_minutes"));
+//                movie.setReleaseDate(rs.getDate("release_date"));
+//                movie.setPosterUrl(rs.getString("image_url"));
+//                movieList.add(movie);
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return movieList;
+//    }
 }
