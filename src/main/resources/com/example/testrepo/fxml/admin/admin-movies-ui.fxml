@@ -37,7 +37,7 @@
                   </TableView>
                   <VBox alignment="CENTER" prefHeight="63.0" prefWidth="334.0">
                      <children>
-                        <Button fx:id="newMovieEntryButton" alignment="CENTER" mnemonicParsing="false" onAction="#addNewMovieEntry" prefHeight="36.0" prefWidth="321.0" style="-fx-background-color: #5B196E;" text="New Movie Entry" textFill="#d6ccffe7">
+                        <Button fx:id="newMovieEntryButton" alignment="CENTER" mnemonicParsing="false" onAction="#addNewMovieEntry" prefHeight="36.0" prefWidth="321.0" style="-fx-background-color: #5B196E;" text="New Movie Entry" textFill="#ffffffe8">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
@@ -62,7 +62,7 @@
                         <Image url="@../../images/default-poster.png" />
                      </image>
                   </ImageView>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#importMoviePoster" prefHeight="27.0" prefWidth="166.0" style="-fx-background-color: #0D179A;" text="Import Movie Poster" textFill="#dfe0ff">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#importMoviePoster" prefHeight="27.0" prefWidth="166.0" style="-fx-background-color: #0D179A;" text="Import Movie Poster" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -112,11 +112,11 @@
                            <children>
                               <HBox fx:id="movieEditingButtonsHBox" alignment="CENTER" prefHeight="35.0" prefWidth="411.0" spacing="50.0">
                                  <children>
-                                    <Button fx:id="confirmChangesButton" mnemonicParsing="false" onAction="#confirmMovieEditingChanges" prefHeight="34.0" prefWidth="154.0" style="-fx-background-color: #0D179A;" text="Confirm Changes" textFill="#b4b2ffe0">
+                                    <Button fx:id="confirmChangesButton" mnemonicParsing="false" onAction="#confirmMovieEditingChanges" prefHeight="34.0" prefWidth="154.0" style="-fx-background-color: #0D179A;" text="Confirm Changes" textFill="#ffffffe0">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font></Button>
-                                    <Button fx:id="deleteMovieButton" mnemonicParsing="false" onAction="#deleteMovieEntry" prefHeight="34.0" prefWidth="159.0" style="-fx-background-color: #DC1A23;" text="Delete Movie" textFill="#fad4d4f1">
+                                    <Button fx:id="deleteMovieButton" mnemonicParsing="false" onAction="#deleteMovieEntry" prefHeight="34.0" prefWidth="159.0" style="-fx-background-color: #DC1A23;" text="Delete Movie" textFill="#fffffff2">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font></Button>

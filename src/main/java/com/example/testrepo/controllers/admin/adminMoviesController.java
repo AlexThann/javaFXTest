@@ -3,12 +3,9 @@ package com.example.testrepo.controllers.admin;
 import com.example.testrepo.models.Movie;
 import com.example.testrepo.util.DbConnection;
 import javafx.animation.PauseTransition;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -20,14 +17,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.util.Duration;
 
 import java.net.MalformedURLException;
 import java.sql.*;
-import java.util.List;
-import java.util.ArrayList;
 
 import java.io.File;
 import java.util.Objects;
@@ -35,7 +28,7 @@ import java.util.Objects;
 public class adminMoviesController {
 
     DbConnection dbConnection = new DbConnection();
-    private ObservableList<Movie> movies = FXCollections.observableArrayList();
+    //private ObservableList<Movie> movies = FXCollections.observableArrayList();
 
     private String posterUrlPath= null;
     @FXML
@@ -70,21 +63,57 @@ public class adminMoviesController {
     Image defaultMoviePoster = new Image(
             Objects.requireNonNull(getClass().getResource("/com/example/testrepo/images/default-poster.png")).toExternalForm()
     );
-//    private final double baseWidth = 800;  // your design width
-//    private final double baseHeight = 600;// your design height
-    double subtleFactor = 0.3;
+
     @FXML
     private void initialize() {
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        releaseDate.setCellValueFactory(new PropertyValueFactory<>("releaseDate"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<>("durationMinutes"));
         initializeMoviesTableView();
+        // Selection listener
+        movieTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                changeEditingAddingButtons(addNewMovieButtonsHBox, movieEditingButtonsHBox);
+                movieTitleField.setText(newValue.getTitle());
+                movieGenreField.setText(newValue.getGenre());
+                movieReleaseDateField.setValue(newValue.getReleaseDate().toLocalDate());
+                movieDurationField.setText(String.valueOf(newValue.getDurationMinutes()));
+                movieDescriptionField.setText(newValue.getDescription());
+
+                if (newValue.getPosterUrl() != null && !newValue.getPosterUrl().isEmpty()) {
+                    moviePosterImage.setImage(new Image(
+                            newValue.getPosterUrl(),
+                            moviePosterImage.getFitWidth(),
+                            moviePosterImage.getFitHeight(),
+                            false,
+                            false
+                    ));
+                } else { // if image is null
+                    moviePosterImage.setImage(defaultMoviePoster);
+                }
+            }
+        });
+        // Listen for the table becoming empty (might not need it)
+        getMovieDataFromDB().addListener((javafx.collections.ListChangeListener<Movie>) change -> {
+            if (getMovieDataFromDB().isEmpty()) {
+                addNewMovieEntry();
+            }
+        });
+        // if the table is empty on startup
+        if (getMovieDataFromDB().isEmpty()) {
+            addNewMovieEntry();
+        }
+
         movieTable.getSelectionModel().selectFirst();
     }
 
-    private Stage getStage(){
-        return (Stage) moviePosterImage.getScene().getWindow();
-    }
-    public void initializeMoviesUI(){
-        //ObservableList<Movie> movieList = Movie.getMovieDataFromDB();
-    }
+//    public void initializeMoviesUI(){
+//        //ObservableList<Movie> movieList = Movie.getMovieDataFromDB();
+//    }
+
+private Stage getStage(){
+    return (Stage) moviePosterImage.getScene().getWindow();
+}
     @FXML
     private void importMoviePoster() {
         FileChooser fileChooser = new FileChooser();
@@ -93,7 +122,6 @@ public class adminMoviesController {
                 new FileChooser.ExtensionFilter("PNG Files", "*.png")
         );
         File selectedFile = fileChooser.showOpenDialog(getStage());
-        // could be kinda useless. will see
         if (selectedFile != null) {
         try {
             posterUrlPath = selectedFile.toURI().toURL().toString();
@@ -114,55 +142,23 @@ public class adminMoviesController {
     }
 
     private void clearMovieFields(){
-        if (moviePosterImage != null) {
-            moviePosterImage.setImage(defaultMoviePoster);
-        } else {
-            System.out.println("moviePosterImage is null");
-        }
         movieTitleField.clear();
         movieGenreField.clear();
-        movieReleaseDateField.setValue(null); // cause of weird bug
+        movieReleaseDateField.setValue(null);
         movieDurationField.clear();
         movieDescriptionField.clear();
-       // posterUrlPath = null;
+        moviePosterImage.setImage(defaultMoviePoster);
     }
 
     private void initializeMoviesTableView() {
         // Fetch fresh data from Movie class
         ObservableList<Movie> movieList = getMovieDataFromDB();
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        releaseDate.setCellValueFactory(new PropertyValueFactory<>("releaseDate"));
-        durationColumn.setCellValueFactory(new PropertyValueFactory<>("durationMinutes"));
         movieTable.setItems(movieList);
-
-        // Listener so when something is selected it appears on the text fields.
-        movieTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue!=null){
-                changeEditingAddingButtons(addNewMovieButtonsHBox,movieEditingButtonsHBox);
-                movieTitleField.setText(newValue.getTitle());
-                movieGenreField.setText(newValue.getGenre());
-                movieReleaseDateField.setValue(newValue.getReleaseDate().toLocalDate());
-                movieDurationField.setText(String.valueOf(newValue.getDurationMinutes()));
-                movieDescriptionField.setText(newValue.getDescription());
-                if (newValue.getPosterUrl() != null && !newValue.getPosterUrl().isEmpty()) {
-                    moviePosterImage.setImage(new Image(newValue.getPosterUrl(),moviePosterImage.getFitWidth(),moviePosterImage.getFitHeight(),false,false ));
-                } else {
-                    moviePosterImage.setImage(null);
-                }
-            }
-        });
-        // Listen for the table becoming empty
-        movieList.addListener((javafx.collections.ListChangeListener<Movie>) change -> {
-            if (movieList.isEmpty()) {
-                addNewMovieEntry(); // call your method
-            }
-        });
-
-        // Optional: if the table is already empty on startup
+        // here was previously the table collumns
         if (movieList.isEmpty()) {
-            addNewMovieEntry();
+            addNewMovieEntry(); // call your method
         }
-
+        // here was previously the selection listener and other listeners
     }
 
     public ObservableList<Movie> getMovieDataFromDB() {
@@ -207,14 +203,9 @@ public class adminMoviesController {
                 ps.setInt(1, selectedMovie.getMovieId());
                 System.out.println("Deleting movie with ID: " + selectedMovie.getMovieId());
 
-                movieErrorLabel.setText(selectedMovie.getTitle() + " has been deleted!");
+                printMessage(selectedMovie.getTitle() + " has been deleted!",false);
                 ps.executeUpdate();
-                movieErrorLabel.setStyle("-fx-text-fill:#DC1A23 ;");
                 initializeMoviesTableView();
-                PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                delay.setOnFinished(event -> movieErrorLabel.setText(""));
-                delay.play();
-
                 movieTable.getSelectionModel().selectFirst();
             }
         } catch (SQLException e) {
@@ -233,6 +224,7 @@ public class adminMoviesController {
                 movieErrorLabel.setText("No movie selected for editing!");
                 return;
             }
+            int editedMovieId = selectedMovie.getMovieId();
             try (Connection conn = dbConnection.getConnection()) {
                 String updateQuery = """
                     UPDATE movies
@@ -245,27 +237,40 @@ public class adminMoviesController {
                     ps.setString(3, movieGenreField.getText());
                     ps.setInt(4, Integer.parseInt(movieDurationField.getText()));
                     ps.setDate(5, Date.valueOf(movieReleaseDateField.getValue()));
-                    ps.setString(6, posterUrlPath);
+                    ps.setString(6, moviePosterImage.getImage().getUrl());
                     ps.setInt(7, selectedMovie.getMovieId());
                     System.out.println(selectedMovie.getMovieId());
                     ps.executeUpdate();
 
-                    movieErrorLabel.setStyle("-fx-text-fill: green;");
-                    movieErrorLabel.setText("Movie Updated Successfully!");
+                    printMessage("Movie Updated Successfully !",false);
                     initializeMoviesTableView();
-                    movieTable.getSelectionModel().select(selectedMovie);
 
+                    // after confirm the movie stays selected
+                    for (Movie m : movieTable.getItems()) {
+                        if (m.getMovieId() == editedMovieId) {
+                            movieTable.getSelectionModel().select(m);
+                            break;
+                        }
+                    }
                 }
             } catch (SQLException e) {
                 System.err.println(e + " Failed to update movie");
             }
         } else {
-            movieErrorLabel.setStyle("-fx-text-fill: #AB1A42;");
-            movieErrorLabel.setText(falseInput);
-            PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished(event -> movieErrorLabel.setText(""));
-            delay.play();
+            printMessage(falseInput,true);
         }
+    }
+
+    private void printMessage(String text, boolean error){
+        if (error == false){
+            movieErrorLabel.setStyle("-fx-text-fill: green;");
+        }else{
+            movieErrorLabel.setStyle("-fx-text-fill: red;");
+        }
+        movieErrorLabel.setText(text);
+        PauseTransition delay = new PauseTransition(Duration.seconds(2.5));
+        delay.setOnFinished(event -> movieErrorLabel.setText(""));
+        delay.play();
     }
 
     @FXML
@@ -293,13 +298,10 @@ public class adminMoviesController {
                     ps.setString(6, posterUrlPath);
                     ps.executeUpdate();
 
-                    movieErrorLabel.setText(movieTitleField.getText() + " has been added!");
-                    movieErrorLabel.setStyle("-fx-text-fill:#159176 ;");
+                    printMessage(movieTitleField.getText() + " has been added!",false);
+
                     clearMovieFields();
                     initializeMoviesTableView();
-                    PauseTransition delay = new PauseTransition(Duration.seconds(2));
-                    delay.setOnFinished(event -> movieErrorLabel.setText(""));
-                    delay.play();
                 }catch(SQLException e){
                     System.err.println(e + "Failed to insert movie");
                 }
@@ -307,12 +309,7 @@ public class adminMoviesController {
                 System.err.println(e + "Failed to edit movie");
             }
         }else {
-
-            movieErrorLabel.setStyle("-fx-text-fill: #AB1A42;");
-            movieErrorLabel.setText(falseInput);
-            PauseTransition delay = new PauseTransition(Duration.seconds(2.5));
-            delay.setOnFinished(event -> movieErrorLabel.setText(""));
-            delay.play();
+            printMessage(falseInput,true);
         }
 
     }
