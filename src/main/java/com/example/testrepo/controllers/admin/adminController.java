@@ -70,6 +70,7 @@ public class adminController {
     @FXML
     private void showDashboard(){
         changeMenu(dashboardPane);
+        dashboardUIController.initializeDashboardUI();
     }
     @FXML
     private void showMovies(){

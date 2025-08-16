@@ -155,15 +155,15 @@
 
 /*Custom date picker*/
 
-.date-picker .arrow-button {
+.custom-date-picker .arrow-button {
     -fx-background-color: transparent;
 }
 
-.date-picker .arrow-button .arrow {
+.custom-date-picker .arrow-button .arrow {
     -fx-background-color: white;
 }
 
-.date-picker .date-picker-display-node{
+.custom-date-picker .date-picker-display-node{
     -fx-background-color:transparent;
     -fx-font-size: 13px;
     -fx-text-fill: white;
@@ -174,7 +174,7 @@
 
 }
 
-.date-picker{
+.custom-date-picker{
     -fx-border-width: 0 0 1.5 0;
     -fx-border-color:white;
     -fx-background-color: transparent;  /* Adjust the background if needed  REMOVES THE AWKWARD AROUND THE THING BACKGROUND*/
@@ -183,12 +183,12 @@
 }
 
 
-.date-picker:focused{
+.custom-date-picker:focused{
     -fx-border-color:#8bcdfc;
     -fx-border-width:0 0 2.35 0;
 }
 
-.date-picker:hover{
+.custom-date-picker:hover{
     -fx-border-color:#8bcdfc;
 
 }

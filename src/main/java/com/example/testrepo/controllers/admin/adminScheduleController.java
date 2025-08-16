@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 public class adminScheduleController {
 
-    DbConnection dbConnection = new DbConnection();
+    private DbConnection dbConnection = new DbConnection();
 
     private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
     HashMap<Integer,Integer> roomAndSeatNumber = new HashMap<>();

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="parentVBox" prefHeight="523.0" prefWidth="690.0" styleClass="admin-main-bg-body" stylesheets="@../../css/admin/admin-schedule.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.admin.adminScheduleController">
+<VBox fx:id="parentVBox" prefHeight="523.0" prefWidth="690.0" styleClass="admin-main-bg-body" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.admin.adminScheduleController">
    <children>
       <AnchorPane prefHeight="126.0" prefWidth="690.0">
          <children>
@@ -38,7 +38,7 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                            <children>
                               <ComboBox fx:id="selectMovieComboBox" prefHeight="25.0" prefWidth="183.0" promptText="Select Movie" styleClass="custom-combo-box" />
-                              <DatePicker fx:id="screenDatePicker" promptText="Screen Date" />
+                              <DatePicker fx:id="screenDatePicker" promptText="Screen Date" styleClass="custom-date-picker" />
                               <TextField fx:id="startTimeTextField" promptText="Start Time" styleClass="input-text-field" />
                               <TextField fx:id="endTimeTextField" promptText="End Time" styleClass="input-text-field" />
                               <ComboBox fx:id="screenRoomComboBox" prefHeight="25.0" prefWidth="190.0" promptText="Screen Room" style="-fx-text-base-color: white;" styleClass="custom-combo-box" />

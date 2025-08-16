@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -16,13 +17,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="moviesHBox" prefHeight="600.0" prefWidth="900.0" spacing="30.0" styleClass="admin-main-bg-body" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.admin.adminMoviesController">
+<HBox fx:id="moviesHBox" prefHeight="600.0" prefWidth="900.0" spacing="30.0" styleClass="admin-main-bg-body" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrepo.controllers.admin.adminMoviesController">
    <children>
       <AnchorPane HBox.hgrow="SOMETIMES">
          <children>
             <VBox prefHeight="500.0" prefWidth="96.0" styleClass="dashboard-container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <TableView fx:id="movieTable" prefHeight="386.0" prefWidth="354.0" VBox.vgrow="ALWAYS">
+                  <TableView id="movie-table" fx:id="movieTable" prefHeight="386.0" prefWidth="354.0" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="titleColumn" text="Title " />
                         <TableColumn fx:id="releaseDate" maxWidth="2000.0" prefWidth="60.0" text="Release Date" />
@@ -37,10 +38,14 @@
                   </TableView>
                   <VBox alignment="CENTER" prefHeight="63.0" prefWidth="334.0">
                      <children>
-                        <Button fx:id="newMovieEntryButton" alignment="CENTER" mnemonicParsing="false" onAction="#addNewMovieEntry" prefHeight="36.0" prefWidth="321.0" style="-fx-background-color: #5B196E;" text="New Movie Entry" textFill="#ffffffe8">
+                        <Button fx:id="newMovieEntryButton" alignment="CENTER" mnemonicParsing="false" onAction="#addNewMovieEntry" prefHeight="36.0" prefWidth="321.0" text="New Movie Entry" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
-                           </font></Button>
+                           </font>
+                           <styleClass>
+                              <String fx:value="new-movie-entry-btn" />
+                              <String fx:value="movie-btn" />
+                           </styleClass></Button>
                      </children>
                   </VBox>
                </children>
@@ -62,13 +67,17 @@
                         <Image url="@../../images/default-poster.png" />
                      </image>
                   </ImageView>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#importMoviePoster" prefHeight="27.0" prefWidth="166.0" style="-fx-background-color: #0D179A;" text="Import Movie Poster" textFill="WHITE">
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#importMoviePoster" prefHeight="27.0" prefWidth="166.0" text="Import Movie Poster" textFill="WHITE">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="import-movie-btn" />
+                        <String fx:value="movie-btn" />
+                     </styleClass>
                   </Button>
                   <TextField fx:id="movieTitleField" prefHeight="40.0" prefWidth="411.0" promptText="Movie Title">
                      <VBox.margin>
@@ -112,14 +121,22 @@
                            <children>
                               <HBox fx:id="movieEditingButtonsHBox" alignment="CENTER" prefHeight="35.0" prefWidth="411.0" spacing="50.0">
                                  <children>
-                                    <Button fx:id="confirmChangesButton" mnemonicParsing="false" onAction="#confirmMovieEditingChanges" prefHeight="34.0" prefWidth="154.0" style="-fx-background-color: #0D179A;" text="Confirm Changes" textFill="#ffffffe0">
+                                    <Button fx:id="confirmChangesButton" mnemonicParsing="false" onAction="#confirmMovieEditingChanges" prefHeight="34.0" prefWidth="154.0" text="Confirm Changes" textFill="#ffffffe0">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
-                                       </font></Button>
-                                    <Button fx:id="deleteMovieButton" mnemonicParsing="false" onAction="#deleteMovieEntry" prefHeight="34.0" prefWidth="159.0" style="-fx-background-color: #DC1A23;" text="Delete Movie" textFill="#fffffff2">
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="confirm-changes-btn" />
+                                          <String fx:value="movie-btn" />
+                                       </styleClass></Button>
+                                    <Button fx:id="deleteMovieButton" mnemonicParsing="false" onAction="#deleteMovieEntry" prefHeight="34.0" prefWidth="159.0" text="Delete Movie" textFill="#fffffff2">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
-                                       </font></Button>
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="delete-movie-btn" />
+                                          <String fx:value="movie-btn" />
+                                       </styleClass></Button>
                                  </children>
                                  <StackPane.margin>
                                     <Insets />
@@ -127,10 +144,14 @@
                               </HBox>
                               <HBox fx:id="addNewMovieButtonsHBox" alignment="CENTER" prefHeight="35.0" prefWidth="411.0" spacing="50.0" visible="false">
                                  <children>
-                                    <Button fx:id="addNewMovieButton" mnemonicParsing="false" onAction="#confirmNewMovieEntry" prefHeight="34.0" prefWidth="206.0" style="-fx-background-color: #159176;" text="Add New Movie" textFill="#d9fff6c7">
+                                    <Button fx:id="addNewMovieButton" mnemonicParsing="false" onAction="#confirmNewMovieEntry" prefHeight="34.0" prefWidth="206.0" text="Add New Movie" textFill="#ffffffc7">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
-                                       </font></Button>
+                                       </font>
+                                       <styleClass>
+                                          <String fx:value="movie-btn" />
+                                          <String fx:value="add-movie-btn" />
+                                       </styleClass></Button>
                                  </children>
                                  <StackPane.margin>
                                     <Insets />
