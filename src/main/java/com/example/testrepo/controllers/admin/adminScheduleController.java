@@ -25,7 +25,7 @@ public class adminScheduleController {
     HashMap<Integer,Integer> roomAndSeatNumber = new HashMap<>();
 
     @FXML
-    private Button addScheduleButton,editScheduleButton,deleteScheduleButton;
+    private Button editScheduleButton,deleteScheduleButton;
 
     @FXML
     private DatePicker screenDatePicker;

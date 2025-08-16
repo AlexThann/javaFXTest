@@ -43,7 +43,7 @@
                               <TextField fx:id="endTimeTextField" promptText="End Time" styleClass="input-text-field" />
                               <ComboBox fx:id="screenRoomComboBox" prefHeight="25.0" prefWidth="190.0" promptText="Screen Room" style="-fx-text-base-color: white;" styleClass="custom-combo-box" />
                               <TextField fx:id="seatsTextField" promptText="No. Seats" styleClass="input-text-field" />
-                              <Spinner fx:id="ticketPriceSpinner" styleClass="custom-spinner" />
+                              <Spinner fx:id="ticketPriceSpinner" editable="true" styleClass="custom-spinner" />
                            </children>
                         </HBox>
                      </children>
