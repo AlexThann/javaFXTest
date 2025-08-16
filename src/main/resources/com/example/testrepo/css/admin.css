@@ -319,6 +319,7 @@
 }
 
 .table-cell{
+    -fx-font-size:13px;
     -fx-padding:0 0 0 15px;
     -fx-border-color: transparent transparent transparent transparent;
     -fx-text-fill: black;

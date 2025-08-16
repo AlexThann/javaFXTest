@@ -276,6 +276,7 @@ private Stage getStage(){
     @FXML
     private void addNewMovieEntry(){
         clearMovieFields();
+        movieTable.getSelectionModel().clearSelection();
         changeEditingAddingButtons(movieEditingButtonsHBox,addNewMovieButtonsHBox);
     }
 
